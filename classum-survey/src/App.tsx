@@ -1,5 +1,12 @@
+import { GlobalStyles } from "@mui/material";
+import { globalStyles } from "@styles";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <GlobalStyles styles={globalStyles} />
+    </>
+  );
 }
 
 export default App;
