@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
-import { GlobalStyles, Container } from "@mui/material";
-import { globalStyles } from "@styles";
+import { Container } from "@mui/material";
 
 const StyledApp = styled.div`
   width: 100%;
@@ -11,8 +10,7 @@ const StyledApp = styled.div`
 function App() {
   return (
     <StyledApp>
-      <GlobalStyles styles={globalStyles} />
-      <Container>
+      <Container maxWidth="md">
         <Outlet />
       </Container>
     </StyledApp>
