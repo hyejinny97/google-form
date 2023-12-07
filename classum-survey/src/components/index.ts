@@ -1,4 +1,4 @@
-export { SurveyTitleBox } from "./Commons";
+export { SurveyTitleBox, SurveyQuestionBox } from "./Commons";
 
 export { SurveyEditPageTitleBox } from "./SurveyEditPage";
 
