@@ -1,5 +1,11 @@
+import { SurveyEditPageTitleBox } from "@components";
+
 function SurveyEditPage() {
-  return <div>Edit 페이지</div>;
+  return (
+    <div>
+      <SurveyEditPageTitleBox />
+    </div>
+  );
 }
 
 export default SurveyEditPage;
