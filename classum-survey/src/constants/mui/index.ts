@@ -2,6 +2,4 @@ export {
   DEFAULT_BORDER_RADIUS_UNIT,
   DEFAULT_PADDING_UNIT,
   DEFAULT_MARGIN_UNIT,
-} from "./mui";
-
-export { BOX_BORDER_RADIUS, BOX_PADDING, BOX_MARGIN } from "./UI";
+} from "./default";
