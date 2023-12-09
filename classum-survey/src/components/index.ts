@@ -1,4 +1,4 @@
-export { SurveyTitleBox, SurveyQuestionBox } from "./Commons";
+export { SurveyTitleBox, SurveyQuestionBox, ShortAnswer } from "./Commons";
 
 export {
   ShortTextIcon,
