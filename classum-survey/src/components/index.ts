@@ -8,6 +8,10 @@ export {
   CheckCircleIcon,
 } from "./Icons";
 
-export { SurveyEditPageTitleBox, QuestionTypeSelect } from "./SurveyEditPage";
+export {
+  SurveyEditPageTitleBox,
+  SurveyEditPageQuestionBox,
+  QuestionTypeSelect,
+} from "./SurveyEditPage";
 
 export { Box } from "./UI";
