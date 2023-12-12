@@ -21,6 +21,7 @@ export {
   QuestionTypeSelect,
   InputOption,
   InputAdditionOption,
+  SurveyEditPageMultipleChoiceAnswer,
 } from "./SurveyEditPage";
 
 export { Box } from "./UI";

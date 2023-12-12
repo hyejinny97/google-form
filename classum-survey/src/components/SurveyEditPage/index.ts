@@ -3,3 +3,4 @@ export { default as SurveyEditPageQuestionBox } from "./SurveyEditPageQuestionBo
 export { default as QuestionTypeSelect } from "./QuestionTypeSelect";
 export { default as InputOption } from "./InputOption";
 export { default as InputAdditionOption } from "./InputAdditionOption";
+export { default as SurveyEditPageMultipleChoiceAnswer } from "./SurveyEditPageMultipleChoiceAnswer";
