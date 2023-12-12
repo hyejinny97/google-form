@@ -20,6 +20,7 @@ export {
   SurveyEditPageQuestionBox,
   QuestionTypeSelect,
   InputOption,
+  InputAdditionOption,
 } from "./SurveyEditPage";
 
 export { Box } from "./UI";
