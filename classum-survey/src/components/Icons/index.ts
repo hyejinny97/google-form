@@ -5,3 +5,4 @@ export { default as CheckBoxIcon } from "@mui/icons-material/CheckBox";
 export { default as CheckCircleIcon } from "@mui/icons-material/CheckCircle";
 export { default as PanoramaFishEyeIcon } from "@mui/icons-material/PanoramaFishEye";
 export { default as CloseIcon } from "@mui/icons-material/Close";
+export { default as CheckBoxOutlineBlankIcon } from "@mui/icons-material/CheckBoxOutlineBlank";

@@ -13,6 +13,7 @@ export {
   CheckCircleIcon,
   PanoramaFishEyeIcon,
   CloseIcon,
+  CheckBoxOutlineBlankIcon,
 } from "./Icons";
 
 export {
@@ -22,6 +23,8 @@ export {
   InputOption,
   InputAdditionOption,
   SurveyEditPageMultipleChoiceAnswer,
+  SurveyEditPageCheckboxAnswer,
+  SurveyEditPageDropdownAnswer,
 } from "./SurveyEditPage";
 
 export { Box } from "./UI";
