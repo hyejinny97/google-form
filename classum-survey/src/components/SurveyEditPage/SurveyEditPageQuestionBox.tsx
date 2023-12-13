@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { Grid, TextField, SelectChangeEvent } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  SelectChangeEvent,
+  Divider,
+  Stack,
+  IconButton,
+  Switch,
+} from "@mui/material";
 import {
   SurveyQuestionBox,
   QuestionTypeSelect,
@@ -9,6 +17,8 @@ import {
   SurveyEditPageMultipleChoiceAnswer,
   SurveyEditPageCheckboxAnswer,
   SurveyEditPageDropdownAnswer,
+  ContentCopyIcon,
+  DeleteIcon,
 } from "@components";
 import {
   Q_TYPE_SHORT,
@@ -24,7 +34,16 @@ const Head = styled.div`
   margin-bottom: 1rem;
 `;
 
-const Body = Head.withComponent("div");
+const Body = styled.div`
+  margin-bottom: 2rem;
+`;
+
+const Foot = styled.div`
+  p {
+    padding: 8px;
+    padding-right: 0;
+  }
+`;
 
 function SurveyEditPageQuestionBox() {
   const [selectedQType, setSelectedQType] = useState(Q_TYPE_MULTIPLE_CHOICE);
@@ -64,6 +83,26 @@ function SurveyEditPageQuestionBox() {
         </Grid>
       </Head>
       <Body>{renderBody}</Body>
+      <Foot>
+        <Divider />
+        <Stack
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+          spacing={1}
+          sx={{ p: 1, pb: 0 }}
+        >
+          <IconButton>
+            <ContentCopyIcon />
+          </IconButton>
+          <IconButton>
+            <DeleteIcon />
+          </IconButton>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <p>필수</p>
+          <Switch color="secondary" />
+        </Stack>
+      </Foot>
     </SurveyQuestionBox>
   );
 }
