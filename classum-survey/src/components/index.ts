@@ -14,6 +14,8 @@ export {
   PanoramaFishEyeIcon,
   CloseIcon,
   CheckBoxOutlineBlankIcon,
+  ContentCopyIcon,
+  DeleteIcon,
 } from "./Icons";
 
 export {
