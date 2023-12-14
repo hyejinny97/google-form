@@ -16,6 +16,7 @@ export {
   CheckBoxOutlineBlankIcon,
   ContentCopyIcon,
   DeleteIcon,
+  AddCircleOutlineIcon,
 } from "./Icons";
 
 export {
@@ -27,6 +28,7 @@ export {
   SurveyEditPageMultipleChoiceAnswer,
   SurveyEditPageCheckboxAnswer,
   SurveyEditPageDropdownAnswer,
+  SurveyEditPageUtilBox,
 } from "./SurveyEditPage";
 
 export { Box } from "./UI";
