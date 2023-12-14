@@ -8,3 +8,4 @@ export { default as CloseIcon } from "@mui/icons-material/Close";
 export { default as CheckBoxOutlineBlankIcon } from "@mui/icons-material/CheckBoxOutlineBlank";
 export { default as ContentCopyIcon } from "@mui/icons-material/ContentCopy";
 export { default as DeleteIcon } from "@mui/icons-material/Delete";
+export { default as AddCircleOutlineIcon } from "@mui/icons-material/AddCircleOutline";

@@ -1,11 +1,46 @@
-import { SurveyEditPageTitleBox, SurveyEditPageQuestionBox } from "@components";
+import styled from "@emotion/styled";
+import {
+  SurveyEditPageTitleBox,
+  SurveyEditPageQuestionBox,
+  SurveyEditPageUtilBox,
+} from "@components";
+
+const StyledSurveyEditPage = styled.div`
+  position: relative;
+`;
+
+const Left = styled.div`
+  width: 100%;
+`;
+
+const Right = styled.div`
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 1rem;
+  min-height: 100%;
+`;
+
+const StyledSurveyEditPageUtilBox = styled(SurveyEditPageUtilBox)`
+  position: sticky;
+  top: 1rem;
+
+  @media (max-width: 1050px) {
+    display: none;
+  }
+`;
 
 function SurveyEditPage() {
   return (
-    <div>
-      <SurveyEditPageTitleBox />
-      <SurveyEditPageQuestionBox />
-    </div>
+    <StyledSurveyEditPage>
+      <Left>
+        <SurveyEditPageTitleBox />
+        <SurveyEditPageQuestionBox />
+      </Left>
+      <Right>
+        <StyledSurveyEditPageUtilBox />
+      </Right>
+    </StyledSurveyEditPage>
   );
 }
 
