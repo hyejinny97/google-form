@@ -14,15 +14,10 @@ import {
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
 } from "@constants";
+import { QuestionTypes } from "questionTypes";
 
 interface QuestionTypeSelectProps {
-  selected:
-    | typeof Q_TYPE_SHORT
-    | typeof Q_TYPE_LONG
-    | typeof Q_TYPE_MULTIPLE_CHOICE
-    | typeof Q_TYPE_CHECKBOX
-    | typeof Q_TYPE_DROPDOWN
-    | string;
+  selected: QuestionTypes | string;
   handleSelectChange: (e: SelectChangeEvent) => void;
 }
 
