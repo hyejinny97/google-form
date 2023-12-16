@@ -8,7 +8,7 @@ function SurveyEditPageQuestionList() {
   return (
     <>
       {questions.map((question) => (
-        <SurveyEditPageQuestionBox type={question.type} />
+        <SurveyEditPageQuestionBox key={question.id} data={question} />
       ))}
     </>
   );
