@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { QuestionTypes } from "questionTypes";
 import styled from "@emotion/styled";
@@ -29,8 +29,14 @@ import {
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
 } from "@constants";
-import { deleteQuestion } from "@stores";
-import type { QuestionType } from "@stores";
+import {
+  deleteQuestion,
+  updateQuestionTitle,
+  updateQuestionType,
+  updateQuestionRequired,
+  updateQuestionOptions,
+} from "@stores";
+import type { QuestionType, OptionType } from "@stores";
 
 interface SurveyEditPageQuestionBoxProps {
   data: QuestionType;
@@ -54,21 +60,46 @@ const Foot = styled.div`
 function SurveyEditPageQuestionBox({
   data: { id, title, type, required, options },
 }: SurveyEditPageQuestionBoxProps) {
-  const [selectedQType, setSelectedQType] = useState(type);
   const dispatch = useDispatch();
 
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateQuestionTitle({ questionId: id, data: e.target.value }));
+  };
+
   const handleSelectChange = (e: SelectChangeEvent) => {
-    setSelectedQType(e.target.value as QuestionTypes);
+    dispatch(
+      updateQuestionType({
+        questionId: id,
+        data: e.target.value as QuestionTypes,
+      })
+    );
+  };
+
+  const handleRequiredSwitchChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    dispatch(
+      updateQuestionRequired({ questionId: id, data: e.target.checked })
+    );
+  };
+
+  const handleOptionsChange = (newOptions: Array<OptionType>) => {
+    dispatch(updateQuestionOptions({ questionId: id, data: newOptions }));
   };
 
   let renderBody;
-  if (selectedQType === Q_TYPE_SHORT) renderBody = <ShortAnswer disabled />;
-  else if (selectedQType === Q_TYPE_LONG) renderBody = <LongAnswer disabled />;
-  else if (selectedQType === Q_TYPE_MULTIPLE_CHOICE)
-    renderBody = <SurveyEditPageMultipleChoiceAnswer />;
-  else if (selectedQType === Q_TYPE_CHECKBOX)
+  if (type === Q_TYPE_SHORT) renderBody = <ShortAnswer disabled />;
+  else if (type === Q_TYPE_LONG) renderBody = <LongAnswer disabled />;
+  else if (type === Q_TYPE_MULTIPLE_CHOICE)
+    renderBody = (
+      <SurveyEditPageMultipleChoiceAnswer
+        value={options as Array<OptionType>}
+        onChange={handleOptionsChange}
+      />
+    );
+  else if (type === Q_TYPE_CHECKBOX)
     renderBody = <SurveyEditPageCheckboxAnswer />;
-  else if (selectedQType === Q_TYPE_DROPDOWN)
+  else if (type === Q_TYPE_DROPDOWN)
     renderBody = <SurveyEditPageDropdownAnswer />;
 
   return (
@@ -77,6 +108,8 @@ function SurveyEditPageQuestionBox({
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <TextField
+              value={title}
+              onChange={handleTitleChange}
               variant="filled"
               placeholder="질문"
               hiddenLabel
@@ -84,10 +117,7 @@ function SurveyEditPageQuestionBox({
             />
           </Grid>
           <Grid item xs={4}>
-            <QuestionTypeSelect
-              selected={selectedQType}
-              handleSelectChange={handleSelectChange}
-            />
+            <QuestionTypeSelect value={type} onChange={handleSelectChange} />
           </Grid>
         </Grid>
       </Head>
@@ -109,7 +139,11 @@ function SurveyEditPageQuestionBox({
           </IconButton>
           <Divider orientation="vertical" variant="middle" flexItem />
           <p>필수</p>
-          <Switch color="secondary" />
+          <Switch
+            color="secondary"
+            checked={required}
+            onChange={handleRequiredSwitchChange}
+          />
         </Stack>
       </Foot>
     </SurveyQuestionBox>
