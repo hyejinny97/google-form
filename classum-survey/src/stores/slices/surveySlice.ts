@@ -9,7 +9,7 @@ type OptionType = {
   option: string;
 };
 
-interface QuestionType {
+export interface QuestionType {
   id: number;
   title: string;
   type: QuestionTypes;
@@ -50,8 +50,14 @@ export const surveySlice = createSlice({
       const newQuestion = { ...defaultQuestion, id: genRandomNumber() };
       state.questions.push(newQuestion);
     },
+    deleteQuestion(state, action: PayloadAction<number>) {
+      const newQuestions = state.questions.filter(
+        (question) => question.id !== action.payload
+      );
+      state.questions = newQuestions;
+    },
   },
 });
 
-export const { addQuestion } = surveySlice.actions;
+export const { addQuestion, deleteQuestion } = surveySlice.actions;
 export default surveySlice.reducer;

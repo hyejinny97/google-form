@@ -1,4 +1,5 @@
 export { store } from "./store";
-export { addQuestion } from "./slices";
+export { addQuestion, deleteQuestion } from "./slices";
+export type { QuestionType } from "./slices";
 
 export type { RootState } from "./store";
