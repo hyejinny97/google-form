@@ -1,14 +1,11 @@
 import { Stack, TextField, IconButton } from "@mui/material";
 import { CloseIcon } from "@components";
-import {
-  OptionType,
-  handleOptionChangeFuncType,
-  handleOptionDeleteFuncType,
-} from "option";
+import { handleOptionChangeFuncType, handleOptionDeleteFuncType } from "option";
+import type { OptionType } from "@stores";
 
 interface InputOptionProps {
   startIcon?: React.ReactNode;
-  option: OptionType;
+  value: OptionType;
   order: number;
   handleOptionChange: handleOptionChangeFuncType;
   handleOptionDelete: handleOptionDeleteFuncType;
@@ -16,7 +13,7 @@ interface InputOptionProps {
 
 function InputOption({
   startIcon,
-  option,
+  value,
   order,
   handleOptionChange,
   handleOptionDelete,
@@ -28,7 +25,7 @@ function InputOption({
         hiddenLabel
         variant="standard"
         fullWidth
-        value={option}
+        value={value.option}
         onChange={(e) => handleOptionChange(e, order)}
       />
       <IconButton onClick={() => handleOptionDelete(order)}>
