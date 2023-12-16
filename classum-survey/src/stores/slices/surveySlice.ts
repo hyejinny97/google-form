@@ -4,7 +4,7 @@ import { QuestionTypes } from "questionTypes";
 import { Q_TYPE_MULTIPLE_CHOICE } from "@constants";
 import { genRandomNumber } from "@utils";
 
-type OptionType = {
+export type OptionType = {
   order: number;
   option: string;
 };
@@ -17,10 +17,23 @@ export interface QuestionType {
   options?: Array<OptionType>;
 }
 
-interface InitialStateTypes {
+interface InitialStateType {
   surveyTitle: string;
   surveyTitleDesc: string;
   questions: Array<QuestionType>;
+}
+
+interface UpdateQuestionActionPayloadType<T> {
+  questionId: number;
+  data: T extends "title"
+    ? string
+    : T extends "type"
+    ? QuestionTypes
+    : T extends "required"
+    ? boolean
+    : T extends "options"
+    ? Array<OptionType>
+    : never;
 }
 
 const defaultQuestion: QuestionType = {
@@ -36,7 +49,7 @@ const defaultQuestion: QuestionType = {
   ],
 };
 
-const initialState: InitialStateTypes = {
+const initialState: InitialStateType = {
   surveyTitle: "제목 없는 설문지",
   surveyTitleDesc: "",
   questions: [defaultQuestion],
@@ -56,8 +69,63 @@ export const surveySlice = createSlice({
       );
       state.questions = newQuestions;
     },
+    updateQuestionTitle(
+      state,
+      action: PayloadAction<UpdateQuestionActionPayloadType<"title">>
+    ) {
+      const newQuestions = state.questions.map((question) => {
+        if (question.id === action.payload.questionId) {
+          question.title = action.payload.data;
+        }
+        return question;
+      });
+      state.questions = newQuestions;
+    },
+    updateQuestionType(
+      state,
+      action: PayloadAction<UpdateQuestionActionPayloadType<"type">>
+    ) {
+      const newQuestions = state.questions.map((question) => {
+        if (question.id === action.payload.questionId) {
+          question.type = action.payload.data;
+        }
+        return question;
+      });
+      state.questions = newQuestions;
+    },
+    updateQuestionRequired(
+      state,
+      action: PayloadAction<UpdateQuestionActionPayloadType<"required">>
+    ) {
+      const newQuestions = state.questions.map((question) => {
+        if (question.id === action.payload.questionId) {
+          question.required = action.payload.data;
+        }
+        return question;
+      });
+      state.questions = newQuestions;
+    },
+    updateQuestionOptions(
+      state,
+      action: PayloadAction<UpdateQuestionActionPayloadType<"options">>
+    ) {
+      const newQuestions = state.questions.map((question) => {
+        if (question.id === action.payload.questionId) {
+          question.options = action.payload.data;
+        }
+        return question;
+      });
+      state.questions = newQuestions;
+    },
   },
 });
 
-export const { addQuestion, deleteQuestion } = surveySlice.actions;
+export const {
+  addQuestion,
+  deleteQuestion,
+  updateQuestionTitle,
+  updateQuestionType,
+  updateQuestionRequired,
+  updateQuestionOptions,
+} = surveySlice.actions;
 export default surveySlice.reducer;
