@@ -17,8 +17,8 @@ import {
 import { QuestionTypes } from "questionTypes";
 
 interface QuestionTypeSelectProps {
-  selected: QuestionTypes | string;
-  handleSelectChange: (e: SelectChangeEvent) => void;
+  value: QuestionTypes | string;
+  onChange: (e: SelectChangeEvent) => void;
 }
 
 const selectOptions = [
@@ -44,18 +44,13 @@ const Option = styled(MenuItem)`
 
 const SelectedOption = Option.withComponent("div");
 
-function QuestionTypeSelect({
-  selected,
-  handleSelectChange,
-}: QuestionTypeSelectProps) {
+function QuestionTypeSelect({ value, onChange }: QuestionTypeSelectProps) {
   return (
     <Select
-      value={selected}
-      onChange={handleSelectChange}
-      renderValue={(selected) => {
-        const selectedOption = selectOptions.find(
-          (opt) => opt.value === selected
-        );
+      value={value}
+      onChange={onChange}
+      renderValue={(value) => {
+        const selectedOption = selectOptions.find((opt) => opt.value === value);
 
         if (!selectedOption) return;
 
