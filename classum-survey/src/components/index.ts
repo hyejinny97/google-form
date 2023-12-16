@@ -29,6 +29,7 @@ export {
   SurveyEditPageCheckboxAnswer,
   SurveyEditPageDropdownAnswer,
   SurveyEditPageUtilBox,
+  SurveyEditPageQuestionList,
 } from "./SurveyEditPage";
 
 export { Box } from "./UI";

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import {
   SurveyEditPageTitleBox,
-  SurveyEditPageQuestionBox,
+  SurveyEditPageQuestionList,
   SurveyEditPageUtilBox,
 } from "@components";
 
@@ -35,7 +35,7 @@ function SurveyEditPage() {
     <StyledSurveyEditPage>
       <Left>
         <SurveyEditPageTitleBox />
-        <SurveyEditPageQuestionBox />
+        <SurveyEditPageQuestionList />
       </Left>
       <Right>
         <StyledSurveyEditPageUtilBox />

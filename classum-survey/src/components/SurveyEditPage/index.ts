@@ -7,3 +7,4 @@ export { default as SurveyEditPageMultipleChoiceAnswer } from "./SurveyEditPageM
 export { default as SurveyEditPageCheckboxAnswer } from "./SurveyEditPageCheckboxAnswer";
 export { default as SurveyEditPageDropdownAnswer } from "./SurveyEditPageDropdownAnswer";
 export { default as SurveyEditPageUtilBox } from "./SurveyEditPageUtilBox";
+export { default as SurveyEditPageQuestionList } from "./SurveyEditPageQuestionList";
