@@ -1,9 +1,9 @@
 import {
-  OptionType,
   handleOptionChangeFuncType,
   handleOptionDeleteFuncType,
   handleOptionAddFuncType,
 } from "option";
+import type { OptionType } from "@stores";
 
 interface UseOptionProps {
   choiceOptions: Array<OptionType>;
@@ -13,7 +13,7 @@ interface UseOptionProps {
 function useOption({ choiceOptions, setChoiceOptions }: UseOptionProps) {
   const handleOptionChange: handleOptionChangeFuncType = (e, order) => {
     const newChoiceOptions = choiceOptions.map((option, idx) => {
-      if (idx === order) return e.target.value;
+      if (idx === order) return { order, option: e.target.value };
       return option;
     });
 
@@ -23,7 +23,7 @@ function useOption({ choiceOptions, setChoiceOptions }: UseOptionProps) {
   const handleOptionDelete: handleOptionDeleteFuncType = (order) => {
     const newChoiceOptions = choiceOptions.filter((option, idx) => {
       if (idx === order) return;
-      return option;
+      return { ...option, order: idx < order ? idx : idx - 1 };
     });
 
     setChoiceOptions(newChoiceOptions);
@@ -32,7 +32,10 @@ function useOption({ choiceOptions, setChoiceOptions }: UseOptionProps) {
   const handleOptionAdd: handleOptionAddFuncType = () => {
     const newChoiceOptions = [
       ...choiceOptions,
-      `옵션 ${choiceOptions.length + 1}`,
+      {
+        order: choiceOptions.length + 1,
+        option: `옵션 ${choiceOptions.length + 1}`,
+      },
     ];
 
     setChoiceOptions(newChoiceOptions);
