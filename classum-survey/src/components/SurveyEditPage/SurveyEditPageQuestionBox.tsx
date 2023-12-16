@@ -1,5 +1,7 @@
-import styled from "@emotion/styled";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { QuestionTypes } from "questionTypes";
+import styled from "@emotion/styled";
 import {
   Grid,
   TextField,
@@ -27,10 +29,11 @@ import {
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
 } from "@constants";
-import { QuestionTypes } from "questionTypes";
+import { deleteQuestion } from "@stores";
+import type { QuestionType } from "@stores";
 
 interface SurveyEditPageQuestionBoxProps {
-  type: QuestionTypes;
+  data: QuestionType;
 }
 
 const Head = styled.div`
@@ -48,8 +51,11 @@ const Foot = styled.div`
   }
 `;
 
-function SurveyEditPageQuestionBox({ type }: SurveyEditPageQuestionBoxProps) {
+function SurveyEditPageQuestionBox({
+  data: { id, title, type, required, options },
+}: SurveyEditPageQuestionBoxProps) {
   const [selectedQType, setSelectedQType] = useState(type);
+  const dispatch = useDispatch();
 
   const handleSelectChange = (e: SelectChangeEvent) => {
     setSelectedQType(e.target.value as QuestionTypes);
@@ -98,7 +104,7 @@ function SurveyEditPageQuestionBox({ type }: SurveyEditPageQuestionBoxProps) {
           <IconButton>
             <ContentCopyIcon />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => dispatch(deleteQuestion(id))}>
             <DeleteIcon />
           </IconButton>
           <Divider orientation="vertical" variant="middle" flexItem />
