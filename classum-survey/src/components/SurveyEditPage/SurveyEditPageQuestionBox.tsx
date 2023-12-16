@@ -27,8 +27,11 @@ import {
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
 } from "@constants";
+import { QuestionTypes } from "questionTypes";
 
-interface SurveyEditPageQuestionBoxProps {}
+interface SurveyEditPageQuestionBoxProps {
+  type: QuestionTypes;
+}
 
 const Head = styled.div`
   margin-bottom: 1rem;
@@ -45,11 +48,11 @@ const Foot = styled.div`
   }
 `;
 
-function SurveyEditPageQuestionBox() {
-  const [selectedQType, setSelectedQType] = useState(Q_TYPE_MULTIPLE_CHOICE);
+function SurveyEditPageQuestionBox({ type }: SurveyEditPageQuestionBoxProps) {
+  const [selectedQType, setSelectedQType] = useState(type);
 
   const handleSelectChange = (e: SelectChangeEvent) => {
-    setSelectedQType(e.target.value);
+    setSelectedQType(e.target.value as QuestionTypes);
   };
 
   let renderBody;
