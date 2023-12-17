@@ -104,7 +104,12 @@ function SurveyEditPageQuestionBox({
       />
     );
   else if (type === Q_TYPE_DROPDOWN)
-    renderBody = <SurveyEditPageDropdownAnswer />;
+    renderBody = (
+      <SurveyEditPageDropdownAnswer
+        value={options as Array<OptionType>}
+        onChange={handleOptionsChange}
+      />
+    );
 
   return (
     <SurveyQuestionBox>
