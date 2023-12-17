@@ -1,17 +1,17 @@
-import { useState } from "react";
 import { Stack } from "@mui/material";
 import { InputOption, InputAdditionOption } from "@components";
 import { useOption } from "@hooks";
-import { OptionType } from "option";
+import type { OptionType } from "@stores";
 
 interface SurveyEditPageDropdownAnswerProps {
-  options?: Array<OptionType>;
+  value: Array<OptionType>;
+  onChange: (newOptions: Array<OptionType>) => void;
 }
 
 function SurveyEditPageDropdownAnswer({
-  options,
+  value: choiceOptions,
+  onChange: setChoiceOptions,
 }: SurveyEditPageDropdownAnswerProps) {
-  const [choiceOptions, setChoiceOptions] = useState(options || ["옵션 1"]);
   const { handleOptionChange, handleOptionDelete, handleOptionAdd } = useOption(
     { choiceOptions, setChoiceOptions }
   );
@@ -24,7 +24,7 @@ function SurveyEditPageDropdownAnswer({
             <InputOption
               startIcon={<span>{idx + 1}</span>}
               order={idx}
-              option={option}
+              value={option}
               handleOptionChange={handleOptionChange}
               handleOptionDelete={handleOptionDelete}
             />
