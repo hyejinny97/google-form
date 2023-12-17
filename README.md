@@ -86,6 +86,10 @@
 
 survey edit page에서 question box의 input 값들을 수정할 때마다 reducer를 실행시켜 redux store에 저장하는 방식으로 진행했더니, question box가 많을 때면 입력창에 키보드로 입력한 값들이 화면에 늦게 나타나는 이슈가 있음
 
+### 🔹 redux store state 개선
+
+개발자 검사 도구에서 profiler 탭의 'Highlight updates when components render.' 설정을 키면, question box의 입력창에 값을 입력할 때마다 페이지 내 전체 컴포넌트가 리렌더링되는 것을 확인할 수 있었음
+
 ## 💡 고민한 점 & 배운 점
 
 ### 🔹 Single Page Application
