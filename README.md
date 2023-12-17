@@ -82,6 +82,10 @@
 
 ## 💥 이슈 및 해결 과정
 
+### 🔹 Debouncing
+
+survey edit page에서 question box의 input 값들을 수정할 때마다 reducer를 실행시켜 redux store에 저장하는 방식으로 진행했더니, question box가 많을 때면 입력창에 키보드로 입력한 값들이 화면에 늦게 나타나는 이슈가 있음
+
 ## 💡 고민한 점 & 배운 점
 
 ### 🔹 Single Page Application
