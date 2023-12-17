@@ -98,7 +98,12 @@ function SurveyEditPageQuestionBox({
       />
     );
   else if (type === Q_TYPE_CHECKBOX)
-    renderBody = <SurveyEditPageCheckboxAnswer />;
+    renderBody = (
+      <SurveyEditPageCheckboxAnswer
+        value={options as Array<OptionType>}
+        onChange={handleOptionsChange}
+      />
+    );
   else if (type === Q_TYPE_DROPDOWN)
     renderBody = <SurveyEditPageDropdownAnswer />;
 
