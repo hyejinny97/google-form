@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { QuestionTypes } from "questionTypes";
 import styled from "@emotion/styled";
@@ -98,9 +97,19 @@ function SurveyEditPageQuestionBox({
       />
     );
   else if (type === Q_TYPE_CHECKBOX)
-    renderBody = <SurveyEditPageCheckboxAnswer />;
+    renderBody = (
+      <SurveyEditPageCheckboxAnswer
+        value={options as Array<OptionType>}
+        onChange={handleOptionsChange}
+      />
+    );
   else if (type === Q_TYPE_DROPDOWN)
-    renderBody = <SurveyEditPageDropdownAnswer />;
+    renderBody = (
+      <SurveyEditPageDropdownAnswer
+        value={options as Array<OptionType>}
+        onChange={handleOptionsChange}
+      />
+    );
 
   return (
     <SurveyQuestionBox>

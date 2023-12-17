@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Stack } from "@mui/material";
 import {
   InputOption,
@@ -6,16 +5,17 @@ import {
   CheckBoxOutlineBlankIcon,
 } from "@components";
 import { useOption } from "@hooks";
-import { OptionType } from "option";
+import type { OptionType } from "@stores";
 
 interface SurveyEditPageCheckboxAnswerProps {
-  options?: Array<OptionType>;
+  value: Array<OptionType>;
+  onChange: (newOptions: Array<OptionType>) => void;
 }
 
 function SurveyEditPageCheckboxAnswer({
-  options,
+  value: choiceOptions,
+  onChange: setChoiceOptions,
 }: SurveyEditPageCheckboxAnswerProps) {
-  const [choiceOptions, setChoiceOptions] = useState(options || ["옵션 1"]);
   const { handleOptionChange, handleOptionDelete, handleOptionAdd } = useOption(
     { choiceOptions, setChoiceOptions }
   );
@@ -28,7 +28,7 @@ function SurveyEditPageCheckboxAnswer({
             <InputOption
               startIcon={<CheckBoxOutlineBlankIcon color="disabled" />}
               order={idx}
-              option={option}
+              value={option}
               handleOptionChange={handleOptionChange}
               handleOptionDelete={handleOptionDelete}
             />
