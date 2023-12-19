@@ -1,6 +1,7 @@
 export {
   default as surveyReducer,
   surveySlice,
+  updateSurveyTitle,
   addQuestion,
   deleteQuestion,
   updateQuestionTitle,
