@@ -1,5 +1,7 @@
 export { store } from "./store";
 export {
+  updateSurveyTitle,
+  updateSurveyTitleDesc,
   addQuestion,
   deleteQuestion,
   updateQuestionTitle,
@@ -7,6 +9,6 @@ export {
   updateQuestionRequired,
   updateQuestionOptions,
 } from "./slices";
-export type { QuestionType, OptionType } from "./slices";
 
 export type { RootState } from "./store";
+export type { QuestionType, OptionType } from "./slices";
