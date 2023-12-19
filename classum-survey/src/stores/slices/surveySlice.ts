@@ -62,6 +62,9 @@ export const surveySlice = createSlice({
     updateSurveyTitle(state, action: PayloadAction<string>) {
       state.surveyTitle = action.payload;
     },
+    updateSurveyTitleDesc(state, action: PayloadAction<string>) {
+      state.surveyTitleDesc = action.payload;
+    },
     addQuestion(state) {
       const newQuestion = { ...defaultQuestion, id: genRandomNumber() };
       state.questions.push(newQuestion);
@@ -125,6 +128,7 @@ export const surveySlice = createSlice({
 
 export const {
   updateSurveyTitle,
+  updateSurveyTitleDesc,
   addQuestion,
   deleteQuestion,
   updateQuestionTitle,

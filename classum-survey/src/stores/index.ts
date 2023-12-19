@@ -1,6 +1,7 @@
 export { store } from "./store";
 export {
   updateSurveyTitle,
+  updateSurveyTitleDesc,
   addQuestion,
   deleteQuestion,
   updateQuestionTitle,
