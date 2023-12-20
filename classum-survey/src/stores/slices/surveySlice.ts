@@ -75,6 +75,15 @@ export const surveySlice = createSlice({
       );
       state.questions = newQuestions;
     },
+    duplicateQuestion(state, action: PayloadAction<number>) {
+      const currentQuestionIdx = state.questions.findIndex(
+        (question) => question.id === action.payload
+      );
+      state.questions.splice(currentQuestionIdx + 1, 0, {
+        ...state.questions[currentQuestionIdx],
+        id: genRandomNumber(),
+      });
+    },
     updateQuestionTitle(
       state,
       action: PayloadAction<UpdateQuestionActionPayloadType<"title">>
@@ -131,6 +140,7 @@ export const {
   updateSurveyTitleDesc,
   addQuestion,
   deleteQuestion,
+  duplicateQuestion,
   updateQuestionTitle,
   updateQuestionType,
   updateQuestionRequired,

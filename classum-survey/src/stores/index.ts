@@ -4,6 +4,7 @@ export {
   updateSurveyTitleDesc,
   addQuestion,
   deleteQuestion,
+  duplicateQuestion,
   updateQuestionTitle,
   updateQuestionType,
   updateQuestionRequired,
