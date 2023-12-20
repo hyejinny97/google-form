@@ -30,6 +30,7 @@ import {
 } from "@constants";
 import {
   deleteQuestion,
+  duplicateQuestion,
   updateQuestionTitle,
   updateQuestionType,
   updateQuestionRequired,
@@ -140,7 +141,7 @@ function SurveyEditPageQuestionBox({
           spacing={1}
           sx={{ p: 1, pb: 0 }}
         >
-          <IconButton>
+          <IconButton onClick={() => dispatch(duplicateQuestion(id))}>
             <ContentCopyIcon />
           </IconButton>
           <IconButton onClick={() => dispatch(deleteQuestion(id))}>
