@@ -33,4 +33,6 @@ export {
   SurveyEditPageQuestionList,
 } from "./SurveyEditPage";
 
+export { SurveyPreviewPageTitleBox } from "./SurveyPreviewPage";
+
 export { Box } from "./UI";
