@@ -37,6 +37,8 @@ export {
 export {
   SurveyPreviewPageTitleBox,
   SurveyPreviewPageUtilBox,
+  SurveyPreviewPageQuestionBox,
+  SurveyPreviewPageQuestionList,
 } from "./SurveyPreviewPage";
 
 export { Box } from "./UI";
