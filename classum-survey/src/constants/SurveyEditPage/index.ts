@@ -5,3 +5,8 @@ export {
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
 } from "./questionType";
+
+export {
+  TITLE_BOX_TITLE_FONT_SIZE,
+  TITLE_BOX_TITLE_DESC_MARGIN,
+} from "./titleBox";
