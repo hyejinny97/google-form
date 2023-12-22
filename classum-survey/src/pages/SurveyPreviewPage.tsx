@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import {
   SurveyPreviewPageTitleBox,
   SurveyPreviewPageUtilBox,
+  SurveyPreviewPageQuestionList,
 } from "@components";
 
 const StyledSurveyPreviewPage = styled.div`
@@ -34,6 +35,7 @@ function SurveyPreviewPage() {
     <StyledSurveyPreviewPage>
       <Left>
         <SurveyPreviewPageTitleBox />
+        <SurveyPreviewPageQuestionList />
       </Left>
       <Right>
         <StyledSurveyPreviewPageUtilBox />
