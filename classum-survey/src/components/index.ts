@@ -18,6 +18,7 @@ export {
   DeleteIcon,
   AddCircleOutlineIcon,
   VisibilityIcon,
+  EditIcon,
 } from "./Icons";
 
 export {
@@ -33,6 +34,9 @@ export {
   SurveyEditPageQuestionList,
 } from "./SurveyEditPage";
 
-export { SurveyPreviewPageTitleBox } from "./SurveyPreviewPage";
+export {
+  SurveyPreviewPageTitleBox,
+  SurveyPreviewPageUtilBox,
+} from "./SurveyPreviewPage";
 
 export { Box } from "./UI";
