@@ -1,5 +1,11 @@
+import { SurveyPreviewPageTitleBox } from "@components";
+
 function SurveyPreviewPage() {
-  return <div>Preview 페이지</div>;
+  return (
+    <div>
+      <SurveyPreviewPageTitleBox />
+    </div>
+  );
 }
 
 export default SurveyPreviewPage;
