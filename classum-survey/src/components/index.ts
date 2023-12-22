@@ -17,6 +17,7 @@ export {
   ContentCopyIcon,
   DeleteIcon,
   AddCircleOutlineIcon,
+  VisibilityIcon,
 } from "./Icons";
 
 export {
