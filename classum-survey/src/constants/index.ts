@@ -13,3 +13,9 @@ export {
 } from "./SurveyEditPage";
 
 export { BOX_BORDER_RADIUS, BOX_PADDING, BOX_MARGIN } from "./UI";
+
+export {
+  PATH_SURVEY_EDIT,
+  PATH_SURVEY_PREVIEW,
+  PATH_SURVEY_SUBMIT,
+} from "./path";
