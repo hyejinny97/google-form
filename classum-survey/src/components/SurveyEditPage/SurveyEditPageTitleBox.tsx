@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import { SurveyTitleBox } from "@components";
 import { updateSurveyTitle, updateSurveyTitleDesc } from "@stores";
 import type { RootState } from "@stores";
+import { TITLE_BOX_TITLE_FONT_SIZE } from "@constants";
 
 function SurveyEditPageTitleBox() {
   const [surveyTitle, surveyTitleDesc] = useSelector(
@@ -28,7 +29,7 @@ function SurveyEditPageTitleBox() {
         onChange={handleSurveyTitleChange}
         variant="standard"
         fullWidth
-        InputProps={{ sx: { fontSize: 30 } }}
+        InputProps={{ sx: { fontSize: TITLE_BOX_TITLE_FONT_SIZE } }}
       />
       <TextField
         value={surveyTitleDesc}
