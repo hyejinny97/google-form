@@ -3,6 +3,7 @@ export {
   SurveyQuestionBox,
   ShortAnswer,
   LongAnswer,
+  MultipleChoiceAnswer,
 } from "./Commons";
 
 export {
