@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
 import { Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { SurveyQuestionBox, ShortAnswer, LongAnswer } from "@components";
+import {
+  SurveyQuestionBox,
+  ShortAnswer,
+  LongAnswer,
+  MultipleChoiceAnswer,
+} from "@components";
 import type { QuestionType } from "@stores";
 import {
   Q_TYPE_SHORT,
@@ -10,6 +15,7 @@ import {
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
 } from "@constants";
+import type { OptionType } from "@stores";
 
 interface SurveyPreviewPageQuestionBoxProps {
   data: QuestionType;
@@ -27,6 +33,14 @@ function SurveyPreviewPageQuestionBox({
   let renderBody;
   if (type === Q_TYPE_SHORT) renderBody = <ShortAnswer />;
   else if (type === Q_TYPE_LONG) renderBody = <LongAnswer />;
+  else if (type === Q_TYPE_MULTIPLE_CHOICE)
+    renderBody = (
+      <MultipleChoiceAnswer
+        options={options as Array<OptionType>}
+        value={1}
+        onChange={(e) => console.log(e.target.value)}
+      />
+    );
 
   return (
     <SurveyQuestionBox>
