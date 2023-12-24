@@ -6,6 +6,7 @@ import {
   ShortAnswer,
   LongAnswer,
   MultipleChoiceAnswer,
+  CheckboxAnswer,
 } from "@components";
 import type { QuestionType } from "@stores";
 import {
@@ -39,6 +40,14 @@ function SurveyPreviewPageQuestionBox({
         options={options as Array<OptionType>}
         value={1}
         onChange={(e) => console.log(e.target.value)}
+      />
+    );
+  else if (type === Q_TYPE_CHECKBOX)
+    renderBody = (
+      <CheckboxAnswer
+        options={options as Array<OptionType>}
+        value={[]}
+        onChange={(e) => console.log(Number(e.target.name), e.target.checked)}
       />
     );
 

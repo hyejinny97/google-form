@@ -4,6 +4,7 @@ export {
   ShortAnswer,
   LongAnswer,
   MultipleChoiceAnswer,
+  CheckboxAnswer,
 } from "./Commons";
 
 export {
