@@ -7,6 +7,7 @@ import {
   LongAnswer,
   MultipleChoiceAnswer,
   CheckboxAnswer,
+  DropdownAnswer,
 } from "@components";
 import type { QuestionType } from "@stores";
 import {
@@ -48,6 +49,14 @@ function SurveyPreviewPageQuestionBox({
         options={options as Array<OptionType>}
         value={[]}
         onChange={(e) => console.log(Number(e.target.name), e.target.checked)}
+      />
+    );
+  else if (type === Q_TYPE_DROPDOWN)
+    renderBody = (
+      <DropdownAnswer
+        options={options as Array<OptionType>}
+        value={""}
+        onChange={(e) => console.log(e.target.value)}
       />
     );
 
