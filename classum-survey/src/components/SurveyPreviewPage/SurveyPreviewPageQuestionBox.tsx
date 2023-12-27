@@ -3,7 +3,7 @@ import { Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import {
   SurveyQuestionBox,
-  ShortAnswer,
+  SurveyPreviewPageShortAnswer,
   LongAnswer,
   MultipleChoiceAnswer,
   CheckboxAnswer,
@@ -33,7 +33,7 @@ function SurveyPreviewPageQuestionBox({
   const theme = useTheme();
 
   let renderBody;
-  if (type === Q_TYPE_SHORT) renderBody = <ShortAnswer />;
+  if (type === Q_TYPE_SHORT) renderBody = <SurveyPreviewPageShortAnswer />;
   else if (type === Q_TYPE_LONG) renderBody = <LongAnswer />;
   else if (type === Q_TYPE_MULTIPLE_CHOICE)
     renderBody = (
