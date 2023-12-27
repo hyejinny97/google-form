@@ -6,3 +6,4 @@ export { default as SurveyPreviewPageShortAnswer } from "./SurveyPreviewPageShor
 export { default as SurveyPreviewPageLongAnswer } from "./SurveyPreviewPageLongAnswer";
 export { default as SurveyPreviewPageMultipleChoiceAnswer } from "./SurveyPreviewPageMultipleChoiceAnswer";
 export { default as SurveyPreviewPageCheckboxAnswer } from "./SurveyPreviewPageCheckboxAnswer";
+export { default as SurveyPreviewPageDropdownAnswer } from "./SurveyPreviewPageDropdownAnswer";
