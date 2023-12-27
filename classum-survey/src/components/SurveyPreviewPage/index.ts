@@ -2,3 +2,4 @@ export { default as SurveyPreviewPageTitleBox } from "./SurveyPreviewPageTitleBo
 export { default as SurveyPreviewPageUtilBox } from "./SurveyPreviewPageUtilBox";
 export { default as SurveyPreviewPageQuestionBox } from "./SurveyPreviewPageQuestionBox";
 export { default as SurveyPreviewPageQuestionList } from "./SurveyPreviewPageQuestionList";
+export { default as SurveyPreviewPageShortAnswer } from "./SurveyPreviewPageShortAnswer";
