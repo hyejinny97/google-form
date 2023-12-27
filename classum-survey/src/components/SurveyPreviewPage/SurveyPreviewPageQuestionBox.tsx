@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import {
   SurveyQuestionBox,
   SurveyPreviewPageShortAnswer,
-  LongAnswer,
+  SurveyPreviewPageLongAnswer,
   MultipleChoiceAnswer,
   CheckboxAnswer,
   DropdownAnswer,
@@ -34,7 +34,7 @@ function SurveyPreviewPageQuestionBox({
 
   let renderBody;
   if (type === Q_TYPE_SHORT) renderBody = <SurveyPreviewPageShortAnswer />;
-  else if (type === Q_TYPE_LONG) renderBody = <LongAnswer />;
+  else if (type === Q_TYPE_LONG) renderBody = <SurveyPreviewPageLongAnswer />;
   else if (type === Q_TYPE_MULTIPLE_CHOICE)
     renderBody = (
       <MultipleChoiceAnswer
