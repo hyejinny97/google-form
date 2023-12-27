@@ -7,7 +7,7 @@ import {
   SurveyPreviewPageLongAnswer,
   SurveyPreviewPageMultipleChoiceAnswer,
   SurveyPreviewPageCheckboxAnswer,
-  DropdownAnswer,
+  SurveyPreviewPageDropdownAnswer,
 } from "@components";
 import type { QuestionType } from "@stores";
 import {
@@ -47,11 +47,7 @@ function SurveyPreviewPageQuestionBox({
     );
   else if (type === Q_TYPE_DROPDOWN)
     renderBody = (
-      <DropdownAnswer
-        options={options as Array<OptionType>}
-        value={""}
-        onChange={(e) => console.log(e.target.value)}
-      />
+      <SurveyPreviewPageDropdownAnswer options={options as Array<OptionType>} />
     );
 
   return (
