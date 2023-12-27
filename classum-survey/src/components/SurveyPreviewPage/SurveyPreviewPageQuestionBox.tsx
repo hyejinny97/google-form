@@ -5,7 +5,7 @@ import {
   SurveyQuestionBox,
   SurveyPreviewPageShortAnswer,
   SurveyPreviewPageLongAnswer,
-  MultipleChoiceAnswer,
+  SurveyPreviewPageMultipleChoiceAnswer,
   CheckboxAnswer,
   DropdownAnswer,
 } from "@components";
@@ -37,18 +37,16 @@ function SurveyPreviewPageQuestionBox({
   else if (type === Q_TYPE_LONG) renderBody = <SurveyPreviewPageLongAnswer />;
   else if (type === Q_TYPE_MULTIPLE_CHOICE)
     renderBody = (
-      <MultipleChoiceAnswer
+      <SurveyPreviewPageMultipleChoiceAnswer
         options={options as Array<OptionType>}
-        value={1}
-        onChange={(e) => console.log(e.target.value)}
       />
     );
   else if (type === Q_TYPE_CHECKBOX)
     renderBody = (
       <CheckboxAnswer
         options={options as Array<OptionType>}
-        value={[]}
-        onChange={(e) => console.log(Number(e.target.name), e.target.checked)}
+        // value={[]}
+        // onChange={(e) => console.log(Number(e.target.name), e.target.checked)}
       />
     );
   else if (type === Q_TYPE_DROPDOWN)
