@@ -4,3 +4,4 @@ export { default as SurveyPreviewPageQuestionBox } from "./SurveyPreviewPageQues
 export { default as SurveyPreviewPageQuestionList } from "./SurveyPreviewPageQuestionList";
 export { default as SurveyPreviewPageShortAnswer } from "./SurveyPreviewPageShortAnswer";
 export { default as SurveyPreviewPageLongAnswer } from "./SurveyPreviewPageLongAnswer";
+export { default as SurveyPreviewPageMultipleChoiceAnswer } from "./SurveyPreviewPageMultipleChoiceAnswer";
