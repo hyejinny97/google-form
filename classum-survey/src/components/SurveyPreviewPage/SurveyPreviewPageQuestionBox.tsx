@@ -3,11 +3,11 @@ import { Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import {
   SurveyQuestionBox,
-  ShortAnswer,
-  LongAnswer,
-  MultipleChoiceAnswer,
-  CheckboxAnswer,
-  DropdownAnswer,
+  SurveyPreviewPageShortAnswer,
+  SurveyPreviewPageLongAnswer,
+  SurveyPreviewPageMultipleChoiceAnswer,
+  SurveyPreviewPageCheckboxAnswer,
+  SurveyPreviewPageDropdownAnswer,
 } from "@components";
 import type { QuestionType } from "@stores";
 import {
@@ -33,31 +33,21 @@ function SurveyPreviewPageQuestionBox({
   const theme = useTheme();
 
   let renderBody;
-  if (type === Q_TYPE_SHORT) renderBody = <ShortAnswer />;
-  else if (type === Q_TYPE_LONG) renderBody = <LongAnswer />;
+  if (type === Q_TYPE_SHORT) renderBody = <SurveyPreviewPageShortAnswer />;
+  else if (type === Q_TYPE_LONG) renderBody = <SurveyPreviewPageLongAnswer />;
   else if (type === Q_TYPE_MULTIPLE_CHOICE)
     renderBody = (
-      <MultipleChoiceAnswer
+      <SurveyPreviewPageMultipleChoiceAnswer
         options={options as Array<OptionType>}
-        value={1}
-        onChange={(e) => console.log(e.target.value)}
       />
     );
   else if (type === Q_TYPE_CHECKBOX)
     renderBody = (
-      <CheckboxAnswer
-        options={options as Array<OptionType>}
-        value={[]}
-        onChange={(e) => console.log(Number(e.target.name), e.target.checked)}
-      />
+      <SurveyPreviewPageCheckboxAnswer options={options as Array<OptionType>} />
     );
   else if (type === Q_TYPE_DROPDOWN)
     renderBody = (
-      <DropdownAnswer
-        options={options as Array<OptionType>}
-        value={""}
-        onChange={(e) => console.log(e.target.value)}
-      />
+      <SurveyPreviewPageDropdownAnswer options={options as Array<OptionType>} />
     );
 
   return (

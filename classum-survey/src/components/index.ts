@@ -42,6 +42,11 @@ export {
   SurveyPreviewPageUtilBox,
   SurveyPreviewPageQuestionBox,
   SurveyPreviewPageQuestionList,
+  SurveyPreviewPageShortAnswer,
+  SurveyPreviewPageLongAnswer,
+  SurveyPreviewPageMultipleChoiceAnswer,
+  SurveyPreviewPageCheckboxAnswer,
+  SurveyPreviewPageDropdownAnswer,
 } from "./SurveyPreviewPage";
 
 export { Box } from "./UI";

@@ -3,8 +3,8 @@ import type { OptionType } from "@stores";
 
 interface MultipleChoiceAnswerProps {
   options: Array<OptionType>;
-  value: number | null; // option의 order
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: number; // option의 order
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function MultipleChoiceAnswer({

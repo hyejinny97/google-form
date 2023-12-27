@@ -3,19 +3,19 @@ import type { OptionType } from "@stores";
 
 interface DropdownAnswerProps {
   options: Array<OptionType>;
-  value: string; // option의 order
+  value: number; // option의 order
   onChange: (e: SelectChangeEvent) => void;
 }
 
 function DropdownAnswer({ options, value, onChange }: DropdownAnswerProps) {
   return (
     <Select
-      value={value}
+      value={value < 0 ? "" : String(value)}
       onChange={onChange}
       displayEmpty
       renderValue={(value) => {
         const selectedOption = options.find(
-          (option) => option.option === value
+          (option) => option.order === Number(value)
         );
 
         if (!selectedOption) return <p>선택</p>;
@@ -26,7 +26,7 @@ function DropdownAnswer({ options, value, onChange }: DropdownAnswerProps) {
     >
       {options.map((option) => {
         return (
-          <MenuItem key={option.order} value={String(option.order)}>
+          <MenuItem key={option.order} value={option.order}>
             {option.option}
           </MenuItem>
         );
