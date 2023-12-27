@@ -43,6 +43,7 @@ export {
   SurveyPreviewPageQuestionBox,
   SurveyPreviewPageQuestionList,
   SurveyPreviewPageShortAnswer,
+  SurveyPreviewPageLongAnswer,
 } from "./SurveyPreviewPage";
 
 export { Box } from "./UI";
