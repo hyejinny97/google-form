@@ -12,4 +12,11 @@ export {
   updateQuestionOptions,
 } from "./surveySlice";
 
+export {
+  default as isSurveySubmittedReducer,
+  isSurveySubmittedSlice,
+  submitSurvey,
+  goBackSurvey,
+} from "./isSurveySubmittedSlice";
+
 export type { QuestionType, OptionType } from "./surveySlice";
