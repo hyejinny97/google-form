@@ -21,6 +21,7 @@ import type { OptionType } from "@stores";
 
 interface SurveyPreviewPageQuestionBoxProps {
   data: QuestionType;
+  disabled?: boolean;
 }
 
 const Body = styled.div`
@@ -29,25 +30,35 @@ const Body = styled.div`
 
 function SurveyPreviewPageQuestionBox({
   data: { id, title, type, required, options },
+  disabled,
 }: SurveyPreviewPageQuestionBoxProps) {
   const theme = useTheme();
 
   let renderBody;
-  if (type === Q_TYPE_SHORT) renderBody = <SurveyPreviewPageShortAnswer />;
-  else if (type === Q_TYPE_LONG) renderBody = <SurveyPreviewPageLongAnswer />;
+  if (type === Q_TYPE_SHORT)
+    renderBody = <SurveyPreviewPageShortAnswer disabled={disabled} />;
+  else if (type === Q_TYPE_LONG)
+    renderBody = <SurveyPreviewPageLongAnswer disabled={disabled} />;
   else if (type === Q_TYPE_MULTIPLE_CHOICE)
     renderBody = (
       <SurveyPreviewPageMultipleChoiceAnswer
         options={options as Array<OptionType>}
+        disabled={disabled}
       />
     );
   else if (type === Q_TYPE_CHECKBOX)
     renderBody = (
-      <SurveyPreviewPageCheckboxAnswer options={options as Array<OptionType>} />
+      <SurveyPreviewPageCheckboxAnswer
+        options={options as Array<OptionType>}
+        disabled={disabled}
+      />
     );
   else if (type === Q_TYPE_DROPDOWN)
     renderBody = (
-      <SurveyPreviewPageDropdownAnswer options={options as Array<OptionType>} />
+      <SurveyPreviewPageDropdownAnswer
+        options={options as Array<OptionType>}
+        disabled={disabled}
+      />
     );
 
   return (
