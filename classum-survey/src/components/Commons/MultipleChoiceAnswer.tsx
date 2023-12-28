@@ -5,12 +5,14 @@ interface MultipleChoiceAnswerProps {
   options: Array<OptionType>;
   value?: number; // option의 order
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 }
 
 function MultipleChoiceAnswer({
   options,
   value,
   onChange,
+  disabled,
 }: MultipleChoiceAnswerProps) {
   return (
     <RadioGroup value={value} onChange={onChange}>
@@ -21,6 +23,7 @@ function MultipleChoiceAnswer({
             value={option.order}
             control={<Radio />}
             label={option.option}
+            disabled={disabled}
           />
         );
       })}
