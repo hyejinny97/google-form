@@ -9,6 +9,8 @@ export {
   updateQuestionType,
   updateQuestionRequired,
   updateQuestionOptions,
+  submitSurvey,
+  goBackSurvey,
 } from "./slices";
 
 export type { RootState } from "./store";
