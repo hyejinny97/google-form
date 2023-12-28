@@ -1,9 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { surveyReducer, surveySlice } from "./slices";
+import {
+  surveyReducer,
+  surveySlice,
+  isSurveySubmittedReducer,
+  isSurveySubmittedSlice,
+} from "./slices";
 
 const store = configureStore({
   reducer: {
     [surveySlice.name]: surveyReducer,
+    [isSurveySubmittedSlice.name]: isSurveySubmittedReducer,
   },
 });
 

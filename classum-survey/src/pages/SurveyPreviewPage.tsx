@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
 import {
   SurveyPreviewPageTitleBox,
@@ -36,6 +37,7 @@ function SurveyPreviewPage() {
       <Left>
         <SurveyPreviewPageTitleBox />
         <SurveyPreviewPageQuestionList />
+        <Outlet />
       </Left>
       <Right>
         <StyledSurveyPreviewPageUtilBox />

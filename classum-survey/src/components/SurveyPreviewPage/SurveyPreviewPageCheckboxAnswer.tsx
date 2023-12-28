@@ -4,10 +4,12 @@ import type { OptionType } from "@stores";
 
 interface SurveyPreviewPageCheckboxAnswerProps {
   options: Array<OptionType>;
+  disabled?: boolean;
 }
 
 function SurveyPreviewPageCheckboxAnswer({
   options,
+  disabled,
 }: SurveyPreviewPageCheckboxAnswerProps) {
   const [selected, setSelected] = useState<Array<number>>([-1]);
 
@@ -25,6 +27,7 @@ function SurveyPreviewPageCheckboxAnswer({
       options={options}
       value={selected}
       onChange={handleSelectChange}
+      disabled={disabled}
     />
   );
 }

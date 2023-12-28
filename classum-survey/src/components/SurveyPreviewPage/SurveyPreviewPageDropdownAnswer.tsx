@@ -5,10 +5,12 @@ import type { OptionType } from "@stores";
 
 interface SurveyPreviewPageDropdownAnswerProps {
   options: Array<OptionType>;
+  disabled?: boolean;
 }
 
 function SurveyPreviewPageDropdownAnswer({
   options,
+  disabled,
 }: SurveyPreviewPageDropdownAnswerProps) {
   const [selected, setSelected] = useState<number>(-1);
 
@@ -21,6 +23,7 @@ function SurveyPreviewPageDropdownAnswer({
       options={options}
       value={selected}
       onChange={handleSelectChange}
+      disabled={disabled}
     />
   );
 }

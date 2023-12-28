@@ -1,10 +1,15 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import App from "./App";
-import { SurveyEditPage, SurveyPreviewPage, SurveySubmitPage } from "@pages";
+import {
+  SurveyEditPage,
+  SurveyPreviewPage,
+  SurveyPreviewFooter,
+  SurveySubmitFooter,
+} from "@pages";
 import {
   PATH_SURVEY_EDIT,
   PATH_SURVEY_PREVIEW,
-  PATH_SURVEY_SUBMIT,
+  PATH_SURVEY_PREVIEW_SUBMIT,
 } from "@constants";
 
 const router = createBrowserRouter([
@@ -23,10 +28,16 @@ const router = createBrowserRouter([
       {
         path: PATH_SURVEY_PREVIEW,
         element: <SurveyPreviewPage />,
-      },
-      {
-        path: PATH_SURVEY_SUBMIT,
-        element: <SurveySubmitPage />,
+        children: [
+          {
+            index: true,
+            element: <SurveyPreviewFooter />,
+          },
+          {
+            path: PATH_SURVEY_PREVIEW_SUBMIT,
+            element: <SurveySubmitFooter />,
+          },
+        ],
       },
     ],
   },
