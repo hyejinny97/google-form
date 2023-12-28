@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
+import { Stack } from "@mui/material";
 import {
   SurveyPreviewPageTitleBox,
   SurveyPreviewPageUtilBox,
   SurveyPreviewPageQuestionList,
+  SurveySubmitButton,
 } from "@components";
 
 const StyledSurveyPreviewPage = styled.div`
@@ -36,6 +38,14 @@ function SurveyPreviewPage() {
       <Left>
         <SurveyPreviewPageTitleBox />
         <SurveyPreviewPageQuestionList />
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          mt={2}
+        >
+          <SurveySubmitButton />
+        </Stack>
       </Left>
       <Right>
         <StyledSurveyPreviewPageUtilBox />
