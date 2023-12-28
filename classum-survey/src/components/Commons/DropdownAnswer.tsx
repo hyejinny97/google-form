@@ -5,9 +5,15 @@ interface DropdownAnswerProps {
   options: Array<OptionType>;
   value: number; // option의 order
   onChange: (e: SelectChangeEvent) => void;
+  disabled?: boolean;
 }
 
-function DropdownAnswer({ options, value, onChange }: DropdownAnswerProps) {
+function DropdownAnswer({
+  options,
+  value,
+  onChange,
+  disabled,
+}: DropdownAnswerProps) {
   return (
     <Select
       value={value < 0 ? "" : String(value)}
@@ -23,6 +29,7 @@ function DropdownAnswer({ options, value, onChange }: DropdownAnswerProps) {
         return <p>{selectedOption.option}</p>;
       }}
       sx={{ width: 0.5 }}
+      disabled={disabled}
     >
       {options.map((option) => {
         return (
