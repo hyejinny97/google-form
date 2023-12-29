@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { SurveySubmitButton } from "@components";
+import { SurveySubmitButton, SurveyClearButton } from "@components";
 
 function SurveyPreviewFooter() {
   return (
@@ -10,6 +10,7 @@ function SurveyPreviewFooter() {
       mt={2}
     >
       <SurveySubmitButton />
+      <SurveyClearButton />
     </Stack>
   );
 }
