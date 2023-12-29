@@ -9,3 +9,4 @@ export { default as SurveyPreviewPageCheckboxAnswer } from "./SurveyPreviewPageC
 export { default as SurveyPreviewPageDropdownAnswer } from "./SurveyPreviewPageDropdownAnswer";
 export { default as SurveySubmitButton } from "./SurveySubmitButton";
 export { default as SurveyGoBackButton } from "./SurveyGoBackButton";
+export { default as SurveyClearButton } from "./SurveyClearButton";

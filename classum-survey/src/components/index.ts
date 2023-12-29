@@ -49,6 +49,7 @@ export {
   SurveyPreviewPageDropdownAnswer,
   SurveySubmitButton,
   SurveyGoBackButton,
+  SurveyClearButton,
 } from "./SurveyPreviewPage";
 
 export { Box } from "./UI";
