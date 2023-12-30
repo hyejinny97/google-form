@@ -46,6 +46,10 @@ interface SurveyEditPageQuestionBoxProps {
 
 const QuestionBox = styled(SurveyQuestionBox)`
   position: relative;
+
+  &:hover .horizontal-indicator {
+    display: block;
+  }
 `;
 
 const Head = styled.div`
@@ -64,10 +68,12 @@ const Foot = styled.div`
 `;
 
 const HorizontalIndicator = styled(HorizontalDragIndicatorIcon)`
+  display: none;
   position: absolute;
   top: ${BOX_PADDING / 2}px;
   left: 50%;
   transform: translate(-50%);
+  cursor: pointer;
 `;
 
 function SurveyEditPageQuestionBox({
@@ -127,7 +133,7 @@ function SurveyEditPageQuestionBox({
 
   return (
     <QuestionBox>
-      <HorizontalIndicator />
+      <HorizontalIndicator className="horizontal-indicator" />
       <Head>
         <Grid container spacing={3}>
           <Grid item xs={8}>
