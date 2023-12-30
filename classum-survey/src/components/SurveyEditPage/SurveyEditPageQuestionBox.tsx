@@ -20,6 +20,7 @@ import {
   SurveyEditPageDropdownAnswer,
   ContentCopyIcon,
   DeleteIcon,
+  HorizontalDragIndicatorIcon,
 } from "@components";
 import {
   Q_TYPE_SHORT,
@@ -27,6 +28,7 @@ import {
   Q_TYPE_MULTIPLE_CHOICE,
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
+  BOX_PADDING,
 } from "@constants";
 import {
   deleteQuestion,
@@ -42,6 +44,10 @@ interface SurveyEditPageQuestionBoxProps {
   data: QuestionType;
 }
 
+const QuestionBox = styled(SurveyQuestionBox)`
+  position: relative;
+`;
+
 const Head = styled.div`
   margin-bottom: 1rem;
 `;
@@ -55,6 +61,13 @@ const Foot = styled.div`
     padding: 8px;
     padding-right: 0;
   }
+`;
+
+const HorizontalIndicator = styled(HorizontalDragIndicatorIcon)`
+  position: absolute;
+  top: ${BOX_PADDING / 2}px;
+  left: 50%;
+  transform: translate(-50%);
 `;
 
 function SurveyEditPageQuestionBox({
@@ -113,7 +126,8 @@ function SurveyEditPageQuestionBox({
     );
 
   return (
-    <SurveyQuestionBox>
+    <QuestionBox>
+      <HorizontalIndicator />
       <Head>
         <Grid container spacing={3}>
           <Grid item xs={8}>
@@ -156,7 +170,7 @@ function SurveyEditPageQuestionBox({
           />
         </Stack>
       </Foot>
-    </SurveyQuestionBox>
+    </QuestionBox>
   );
 }
 
