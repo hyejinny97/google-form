@@ -11,3 +11,6 @@ export { default as DeleteIcon } from "@mui/icons-material/Delete";
 export { default as AddCircleOutlineIcon } from "@mui/icons-material/AddCircleOutline";
 export { default as VisibilityIcon } from "@mui/icons-material/Visibility";
 export { default as EditIcon } from "@mui/icons-material/Edit";
+export { default as DragIndicatorIcon } from "@mui/icons-material/DragIndicator";
+export { default as VerticalDragIndicatorIcon } from "./VerticalDragIndicatorIcon";
+export { default as HorizontalDragIndicatorIcon } from "./HorizontalDragIndicatorIcon";

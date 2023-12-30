@@ -22,6 +22,9 @@ export {
   AddCircleOutlineIcon,
   VisibilityIcon,
   EditIcon,
+  DragIndicatorIcon,
+  VerticalDragIndicatorIcon,
+  HorizontalDragIndicatorIcon,
 } from "./Icons";
 
 export {
