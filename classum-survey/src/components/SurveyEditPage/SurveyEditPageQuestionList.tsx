@@ -1,10 +1,10 @@
 import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "@emotion/styled";
-import type { RootState } from "@stores";
+import type { RootState, QuestionType } from "@stores";
+import { reorderQuestions } from "@stores";
 import { SurveyEditPageQuestionBox } from "@components";
 import {
-  CLASSNAME_HORIZONTAL_INDICATOR,
   CLASSNAME_QUESTION_BOX,
   CLASSNAME_QUESTION_BOXES_CONTAINER,
 } from "@constants";
@@ -14,27 +14,29 @@ const Container = styled.div`
 `;
 
 function SurveyEditPageQuestionList() {
+  const dispatch = useDispatch();
   const questions = useSelector((state: RootState) => state.survey.questions);
-  const draggedItemIdx = useRef<number>(-1);
+  const container = useRef<HTMLDivElement>(null);
+  const draggedItemId = useRef<number>(-1);
+  const items = useRef<
+    Array<{
+      id: number;
+      element: HTMLElement;
+      initOffsetTop: number;
+      initOffsetBottom: number;
+    }>
+  >([]);
 
   let prevDragIndicatorPosY: number;
 
-  // const validateDrag = (e: React.DragEvent) => {
-  // const dragIndicator = e.target as HTMLElement;
-  // if (!dragIndicator.className.includes(CLASSNAME_HORIZONTAL_INDICATOR))
-  //   return { dragTarget: null };
+  const getOffsetPos = (el: HTMLElement) => {
+    return {
+      offsetTop: el.offsetTop,
+      offsetBottom: el.offsetTop + el.offsetHeight,
+    };
+  };
 
-  // const dragTarget = dragIndicator.closest(
-  //   `.${CLASSNAME_QUESTION_BOX}`
-  // ) as HTMLElement;
-  // if (!dragTarget) return { dragTarget: null };
-
-  // return { dragTarget };
-  // };
-
-  const handleDragStart = (e: React.DragEvent, idx: number) => {
-    console.log("start");
-
+  const handleDragStart = (e: React.DragEvent, id: number) => {
     // drag ghost image 제거
     const img = new Image();
     e.dataTransfer.setDragImage(img, 0, 0);
@@ -43,15 +45,31 @@ function SurveyEditPageQuestionList() {
     e.dataTransfer.effectAllowed = "move";
 
     // drag 되고 있는 item 기록
-    draggedItemIdx.current = idx;
+    draggedItemId.current = id;
+
+    // container 내 모든 items의 offsetTop, offsetBottom 위치 구하기
+    const containerEl = container.current;
+    const itemsEl = containerEl?.querySelectorAll(`.${CLASSNAME_QUESTION_BOX}`);
+    if (!itemsEl) return;
+
+    items.current = [...itemsEl].map((el, idx) => {
+      const element = el as HTMLElement;
+      const { offsetTop: initOffsetTop, offsetBottom: initOffsetBottom } =
+        getOffsetPos(itemsEl[idx] as HTMLElement);
+
+      return {
+        id: Number(element.dataset.id),
+        element,
+        initOffsetTop,
+        initOffsetBottom,
+      };
+    });
 
     // 초깃값 설정
     prevDragIndicatorPosY = e.pageY;
   };
 
   const handleDrag = (e: React.DragEvent) => {
-    console.log("drag");
-
     const dragTarget = e.target as HTMLElement;
 
     const container = dragTarget.offsetParent as HTMLElement;
@@ -61,65 +79,137 @@ function SurveyEditPageQuestionList() {
     const currentDragIndicatorPosY = e.pageY;
     const dragIndicatorMove = currentDragIndicatorPosY - prevDragIndicatorPosY;
 
-    const currentDragTargetPosTop = dragTarget.offsetTop;
-    const currentDragTargetPosBottom =
-      currentDragTargetPosTop + dragTarget.offsetHeight;
+    const {
+      offsetTop: currentDragTargetPosTop,
+      offsetBottom: currentDragTargetPosBottom,
+    } = getOffsetPos(dragTarget);
 
-    // 상한선
-    if (currentDragTargetPosTop + dragIndicatorMove < 0) return;
+    const finalDragTargetPosTop = currentDragTargetPosTop + dragIndicatorMove;
+    const finalDragTargetPosBottom =
+      currentDragTargetPosBottom + dragIndicatorMove;
 
-    // 하한선
-    if (currentDragTargetPosBottom + dragIndicatorMove > container.offsetHeight)
-      return;
+    // container 범위 내에서만 item 이동 가능
+    const isOverTopLimit = finalDragTargetPosTop < 0; // 상한선
+    const isOverBottomLimit = finalDragTargetPosBottom > container.offsetHeight; // 하한선
 
-    // drag 정도에 따라 화면 상에서 이동시키기
-    dragTarget.style.top = `${
-      parseInt(dragTarget.style.top || "0") + dragIndicatorMove
-    }px`;
-    dragTarget.style.zIndex = "100";
-    prevDragIndicatorPosY = currentDragIndicatorPosY;
+    if (isOverTopLimit || isOverBottomLimit) return;
+    else {
+      // 약간 투명하게 스타일 변경
+      dragTarget.style.opacity = "0.7";
 
-    // 약간 투명하게 스타일 변경
-    dragTarget.style.opacity = "0.7";
+      // 박스 그림자 추가
+      dragTarget.style.boxShadow = "0.3rem 0.3rem 0.5rem 0.1rem #E0E0E0";
 
-    // 박스 그림자 추가
-    dragTarget.style.boxShadow = "0.3rem 0.3rem 0.5rem 0.1rem #E0E0E0";
+      // drag 정도에 따라 화면 상에서 이동시키기
+      dragTarget.style.top = `${
+        parseInt(dragTarget.style.top || "0") + dragIndicatorMove
+      }px`;
+      dragTarget.style.zIndex = "100";
+      prevDragIndicatorPosY = currentDragIndicatorPosY;
+    }
+
+    // 현재 drag item
+    const currentId = draggedItemId.current;
+    const currentIdx = items.current.findIndex((item) => item.id === currentId);
+    const currentItem = items.current[currentIdx];
+    if (!currentItem) return;
+
+    // 아래 item을 넘은 경우
+    const nextItem = items.current[currentIdx + 1];
+    if (nextItem && finalDragTargetPosBottom >= nextItem.initOffsetBottom) {
+      // 아래 item을 위로 올리기
+      const move = currentItem.initOffsetTop - nextItem.initOffsetTop;
+      nextItem.element.style.top = `${move}px`;
+
+      // items 순서 수정
+      items.current = [
+        ...items.current.slice(0, currentIdx),
+        {
+          ...nextItem,
+          initOffsetTop: currentItem.initOffsetTop,
+          initOffsetBottom:
+            currentItem.initOffsetTop + nextItem.element.offsetHeight,
+        },
+        {
+          ...currentItem,
+          initOffsetTop:
+            nextItem.initOffsetBottom - currentItem.element.offsetHeight,
+          initOffsetBottom: nextItem.initOffsetBottom,
+        },
+        ...items.current.slice(currentIdx + 2),
+      ];
+    }
+
+    // 위 item을 넘은 경우
+    const prevItem = items.current[currentIdx - 1];
+    if (prevItem && finalDragTargetPosTop <= prevItem.initOffsetTop) {
+      // 위 item을 아래로 내리기
+      const move = currentItem.initOffsetBottom - prevItem.initOffsetBottom;
+      prevItem.element.style.top = `${move}px`;
+
+      // items 순서 수정
+      items.current = [
+        ...items.current.slice(0, currentIdx - 1),
+        {
+          ...currentItem,
+          initOffsetTop: prevItem.initOffsetTop,
+          initOffsetBottom:
+            prevItem.initOffsetTop + currentItem.element.offsetHeight,
+        },
+        {
+          ...prevItem,
+          initOffsetTop:
+            currentItem.initOffsetBottom - prevItem.element.offsetHeight,
+          initOffsetBottom: currentItem.initOffsetBottom,
+        },
+        ...items.current.slice(currentIdx + 1),
+      ];
+    }
   };
 
-  const handleDragOver = (e: React.DragEvent, idx: number) => {
-    console.log("over");
+  const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-
-    // drag 되지 않은 경우
-    if (draggedItemIdx.current < 0) return;
-
-    console.log(idx, e.target);
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
-    console.log("end");
-
     const dragTarget = e.target as HTMLElement;
 
-    // drag item 제거
-    draggedItemIdx.current = -1;
-
-    // 투명성 원래대로 돌려놓기
+    // 투명성 초기화
     dragTarget.style.opacity = "1";
 
-    // 박스 그림자 삭제
+    // 박스 그림자 초기화
     dragTarget.style.boxShadow = "none";
+
+    // z-index 초기화
+    dragTarget.style.zIndex = "0";
+
+    // state 변경
+    const newQuestions = items.current.map((item) => {
+      const question = questions.find((q) => q.id === item.id) as QuestionType;
+      return question;
+    });
+
+    dispatch(reorderQuestions(newQuestions));
+
+    // 전체 items의 top 초기화
+    items.current.forEach((item) => (item.element.style.top = "0"));
+
+    // drag item 초기화
+    draggedItemId.current = -1;
+
+    // items 초기화
+    items.current = [];
   };
 
   return (
-    <Container className={CLASSNAME_QUESTION_BOXES_CONTAINER}>
-      {questions.map((question, idx) => (
+    <Container className={CLASSNAME_QUESTION_BOXES_CONTAINER} ref={container}>
+      {questions.map((question) => (
         <SurveyEditPageQuestionBox
           key={question.id}
           data={question}
-          onDragStart={(e: React.DragEvent) => handleDragStart(e, idx)}
+          onDragStart={(e: React.DragEvent) => handleDragStart(e, question.id)}
           onDrag={handleDrag}
-          onDragOver={(e: React.DragEvent) => handleDragOver(e, idx)}
+          onDragOver={handleDragOver}
           onDragEnd={handleDragEnd}
         />
       ))}
