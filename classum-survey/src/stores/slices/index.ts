@@ -10,6 +10,7 @@ export {
   updateQuestionType,
   updateQuestionRequired,
   updateQuestionOptions,
+  reorderQuestions,
 } from "./surveySlice";
 
 export {
