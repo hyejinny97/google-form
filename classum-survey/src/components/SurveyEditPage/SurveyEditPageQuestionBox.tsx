@@ -172,6 +172,7 @@ function SurveyEditPageQuestionBox({
     <DragTarget
       className={CLASSNAME_QUESTION_BOX}
       ref={dragTarget}
+      data-id={id}
       draggable
       onDragStart={executeOnlyDragIndicatorDragged(onDragStart)}
       onDrag={executeOnlyDragIndicatorDragged(onDrag)}
