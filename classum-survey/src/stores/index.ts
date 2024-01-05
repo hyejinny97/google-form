@@ -11,6 +11,7 @@ export {
   updateQuestionOptions,
   submitSurvey,
   goBackSurvey,
+  reorderQuestions,
 } from "./slices";
 
 export type { RootState } from "./store";

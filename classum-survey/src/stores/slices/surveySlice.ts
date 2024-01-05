@@ -132,6 +132,9 @@ export const surveySlice = createSlice({
       });
       state.questions = newQuestions;
     },
+    reorderQuestions(state, action: PayloadAction<Array<QuestionType>>) {
+      state.questions = action.payload;
+    },
   },
 });
 
@@ -145,5 +148,6 @@ export const {
   updateQuestionType,
   updateQuestionRequired,
   updateQuestionOptions,
+  reorderQuestions,
 } = surveySlice.actions;
 export default surveySlice.reducer;
