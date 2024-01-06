@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Box } from "@components";
 import { BOX_MARGIN } from "@constants";
 
@@ -6,12 +7,14 @@ interface SurveyQuestionBoxProps {
   children?: React.ReactNode | string;
 }
 
-function SurveyQuestionBox({ className, children }: SurveyQuestionBoxProps) {
-  return (
-    <Box className={className} sx={{ mt: BOX_MARGIN }}>
-      {children}
-    </Box>
-  );
-}
+const SurveyQuestionBox = forwardRef(
+  ({ className, children }: SurveyQuestionBoxProps, ref) => {
+    return (
+      <Box className={className} sx={{ mt: BOX_MARGIN }} ref={ref}>
+        {children}
+      </Box>
+    );
+  }
+);
 
 export default SurveyQuestionBox;
