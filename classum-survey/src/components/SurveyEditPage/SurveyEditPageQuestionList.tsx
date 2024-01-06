@@ -4,10 +4,6 @@ import styled from "@emotion/styled";
 import type { RootState, QuestionType } from "@stores";
 import { reorderQuestions } from "@stores";
 import { SurveyEditPageQuestionBox } from "@components";
-import {
-  CLASSNAME_QUESTION_BOX,
-  CLASSNAME_QUESTION_BOXES_CONTAINER,
-} from "@constants";
 
 const Container = styled.div`
   position: relative;
@@ -16,6 +12,7 @@ const Container = styled.div`
 function SurveyEditPageQuestionList() {
   const dispatch = useDispatch();
   const questions = useSelector((state: RootState) => state.survey.questions);
+
   const container = useRef<HTMLDivElement>(null);
   const draggedItemId = useRef<number>(-1);
   const items = useRef<
@@ -49,7 +46,7 @@ function SurveyEditPageQuestionList() {
 
     // container 내 모든 items의 offsetTop, offsetBottom 위치 구하기
     const containerEl = container.current;
-    const itemsEl = containerEl?.querySelectorAll(`.${CLASSNAME_QUESTION_BOX}`);
+    const itemsEl = containerEl?.querySelectorAll(".draggable-item");
     if (!itemsEl) return;
 
     items.current = [...itemsEl].map((el, idx) => {
@@ -202,7 +199,7 @@ function SurveyEditPageQuestionList() {
   };
 
   return (
-    <Container className={CLASSNAME_QUESTION_BOXES_CONTAINER} ref={container}>
+    <Container ref={container}>
       {questions.map((question) => (
         <SurveyEditPageQuestionBox
           key={question.id}

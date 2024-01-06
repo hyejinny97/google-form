@@ -30,7 +30,6 @@ import {
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
   BOX_PADDING,
-  CLASSNAME_QUESTION_BOX,
   CLASSNAME_HORIZONTAL_INDICATOR,
 } from "@constants";
 import {
@@ -170,7 +169,7 @@ function SurveyEditPageQuestionBox({
 
   return (
     <DragTarget
-      className={CLASSNAME_QUESTION_BOX}
+      className="draggable-item"
       ref={dragTarget}
       data-id={id}
       draggable
