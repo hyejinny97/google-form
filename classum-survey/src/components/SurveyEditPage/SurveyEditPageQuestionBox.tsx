@@ -30,7 +30,6 @@ import {
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
   BOX_PADDING,
-  CLASSNAME_QUESTION_BOX,
   CLASSNAME_HORIZONTAL_INDICATOR,
 } from "@constants";
 import {
@@ -45,15 +44,8 @@ import type { QuestionType, OptionType } from "@stores";
 
 interface SurveyEditPageQuestionBoxProps {
   data: QuestionType;
-  onDragStart: (e: React.DragEvent) => void;
-  onDrag: (e: React.DragEvent) => void;
-  onDragOver: (e: React.DragEvent) => void;
-  onDragEnd: (e: React.DragEvent) => void;
+  onGoDrag: (go: boolean) => void;
 }
-
-const DragTarget = styled.div`
-  position: relative;
-`;
 
 const QuestionBox = styled(SurveyQuestionBox)`
   position: relative;
@@ -89,34 +81,32 @@ const HorizontalIndicator = styled(HorizontalDragIndicatorIcon)`
 
 function SurveyEditPageQuestionBox({
   data: { id, title, type, required, options },
-  onDragStart,
-  onDrag,
-  onDragOver,
-  onDragEnd,
+  onGoDrag,
 }: SurveyEditPageQuestionBoxProps) {
-  const isIndicatorClicked = useRef(false);
-  const dragTarget = useRef<HTMLDivElement>(null);
+  const questionBox = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const dragTargetEl = dragTarget.current;
+    const questionBoxEl = questionBox.current;
     const handleMouseDown = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      isIndicatorClicked.current = !!target.closest(
+      const isIndicatorClicked = !!target.closest(
         `.${CLASSNAME_HORIZONTAL_INDICATOR}`
       );
+      onGoDrag(isIndicatorClicked);
     };
-    dragTargetEl?.addEventListener("mousedown", handleMouseDown);
+    const handleMouseUp = () => {
+      onGoDrag(false);
+    };
 
-    return () =>
-      dragTargetEl?.removeEventListener("mousedown", handleMouseDown);
+    questionBoxEl?.addEventListener("mousedown", handleMouseDown);
+    questionBoxEl?.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      questionBoxEl?.removeEventListener("mousedown", handleMouseDown);
+      questionBoxEl?.removeEventListener("mouseup", handleMouseUp);
+    };
   }, []);
-
-  const executeOnlyDragIndicatorDragged = (
-    handler: (e: React.DragEvent) => void
-  ) => {
-    return (e: React.DragEvent) => isIndicatorClicked.current && handler(e);
-  };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateQuestionTitle({ questionId: id, data: e.target.value }));
@@ -169,62 +159,51 @@ function SurveyEditPageQuestionBox({
     );
 
   return (
-    <DragTarget
-      className={CLASSNAME_QUESTION_BOX}
-      ref={dragTarget}
-      data-id={id}
-      draggable
-      onDragStart={executeOnlyDragIndicatorDragged(onDragStart)}
-      onDrag={executeOnlyDragIndicatorDragged(onDrag)}
-      onDragOver={onDragOver}
-      onDragEnd={executeOnlyDragIndicatorDragged(onDragEnd)}
-    >
-      <QuestionBox>
-        <HorizontalIndicator />
-        <Head>
-          <Grid container spacing={3}>
-            <Grid item xs={8}>
-              <TextField
-                value={title}
-                onChange={handleTitleChange}
-                variant="filled"
-                placeholder="질문"
-                hiddenLabel
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <QuestionTypeSelect value={type} onChange={handleSelectChange} />
-            </Grid>
-          </Grid>
-        </Head>
-        <Body>{renderBody}</Body>
-        <Foot>
-          <Divider />
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-            spacing={1}
-            sx={{ p: 1, pb: 0 }}
-          >
-            <IconButton onClick={() => dispatch(duplicateQuestion(id))}>
-              <ContentCopyIcon />
-            </IconButton>
-            <IconButton onClick={() => dispatch(deleteQuestion(id))}>
-              <DeleteIcon />
-            </IconButton>
-            <Divider orientation="vertical" variant="middle" flexItem />
-            <p>필수</p>
-            <Switch
-              color="secondary"
-              checked={required}
-              onChange={handleRequiredSwitchChange}
+    <QuestionBox ref={questionBox}>
+      <HorizontalIndicator />
+      <Head>
+        <Grid container spacing={3}>
+          <Grid item xs={8}>
+            <TextField
+              value={title}
+              onChange={handleTitleChange}
+              variant="filled"
+              placeholder="질문"
+              hiddenLabel
+              fullWidth
             />
-          </Stack>
-        </Foot>
-      </QuestionBox>
-    </DragTarget>
+          </Grid>
+          <Grid item xs={4}>
+            <QuestionTypeSelect value={type} onChange={handleSelectChange} />
+          </Grid>
+        </Grid>
+      </Head>
+      <Body>{renderBody}</Body>
+      <Foot>
+        <Divider />
+        <Stack
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+          spacing={1}
+          sx={{ p: 1, pb: 0 }}
+        >
+          <IconButton onClick={() => dispatch(duplicateQuestion(id))}>
+            <ContentCopyIcon />
+          </IconButton>
+          <IconButton onClick={() => dispatch(deleteQuestion(id))}>
+            <DeleteIcon />
+          </IconButton>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <p>필수</p>
+          <Switch
+            color="secondary"
+            checked={required}
+            onChange={handleRequiredSwitchChange}
+          />
+        </Stack>
+      </Foot>
+    </QuestionBox>
   );
 }
 
