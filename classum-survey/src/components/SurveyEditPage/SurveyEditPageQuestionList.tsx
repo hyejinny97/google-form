@@ -9,12 +9,17 @@ const Container = styled.div`
   position: relative;
 `;
 
+const DragTarget = styled.div`
+  position: relative;
+`;
+
 function SurveyEditPageQuestionList() {
   const dispatch = useDispatch();
   const questions = useSelector((state: RootState) => state.survey.questions);
 
   const container = useRef<HTMLDivElement>(null);
   const draggedItemId = useRef<number>(-1);
+  const goDrag = useRef<boolean>(false);
   const items = useRef<
     Array<{
       id: number;
@@ -24,7 +29,9 @@ function SurveyEditPageQuestionList() {
     }>
   >([]);
 
-  let prevDragIndicatorPosY: number;
+  const handleGoDrag = (go: boolean) => {
+    goDrag.current = go;
+  };
 
   const getOffsetPos = (el: HTMLElement) => {
     return {
@@ -33,7 +40,10 @@ function SurveyEditPageQuestionList() {
     };
   };
 
+  let prevDragIndicatorPosY: number;
   const handleDragStart = (e: React.DragEvent, id: number) => {
+    if (!goDrag.current) return;
+
     // drag ghost image 제거
     const img = new Image();
     e.dataTransfer.setDragImage(img, 0, 0);
@@ -67,6 +77,8 @@ function SurveyEditPageQuestionList() {
   };
 
   const handleDrag = (e: React.DragEvent) => {
+    if (!goDrag.current) return;
+
     const dragTarget = e.target as HTMLElement;
 
     const container = dragTarget.offsetParent as HTMLElement;
@@ -169,6 +181,8 @@ function SurveyEditPageQuestionList() {
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
+    if (!goDrag.current) return;
+
     const dragTarget = e.target as HTMLElement;
 
     // 투명성 초기화
@@ -201,14 +215,18 @@ function SurveyEditPageQuestionList() {
   return (
     <Container ref={container}>
       {questions.map((question) => (
-        <SurveyEditPageQuestionBox
+        <DragTarget
           key={question.id}
-          data={question}
+          className="draggable-item"
+          data-id={question.id}
+          draggable
           onDragStart={(e: React.DragEvent) => handleDragStart(e, question.id)}
           onDrag={handleDrag}
           onDragOver={handleDragOver}
           onDragEnd={handleDragEnd}
-        />
+        >
+          <SurveyEditPageQuestionBox data={question} onGoDrag={handleGoDrag} />
+        </DragTarget>
       ))}
     </Container>
   );
