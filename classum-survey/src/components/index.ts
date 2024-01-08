@@ -38,6 +38,8 @@ export {
   SurveyEditPageDropdownAnswer,
   SurveyEditPageUtilBox,
   SurveyEditPageQuestionList,
+  DragContainer,
+  DragTarget,
 } from "./SurveyEditPage";
 
 export {

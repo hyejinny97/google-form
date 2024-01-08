@@ -8,3 +8,5 @@ export { default as SurveyEditPageCheckboxAnswer } from "./SurveyEditPageCheckbo
 export { default as SurveyEditPageDropdownAnswer } from "./SurveyEditPageDropdownAnswer";
 export { default as SurveyEditPageUtilBox } from "./SurveyEditPageUtilBox";
 export { default as SurveyEditPageQuestionList } from "./SurveyEditPageQuestionList";
+export { default as DragContainer } from "./DragContainer";
+export { default as DragTarget } from "./DragTarget";
