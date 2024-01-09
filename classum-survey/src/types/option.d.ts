@@ -3,10 +3,10 @@ declare module "option" {
 
   export type handleOptionChangeFuncType = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    order: number
+    id: number
   ) => void;
 
-  export type handleOptionDeleteFuncType = (order: number) => void;
+  export type handleOptionDeleteFuncType = (id: number) => void;
 
   export type handleOptionAddFuncType = () => void;
 }
