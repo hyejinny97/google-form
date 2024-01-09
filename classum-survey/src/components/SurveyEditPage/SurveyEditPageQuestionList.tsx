@@ -37,7 +37,7 @@ function SurveyEditPageQuestionList() {
         return (
           <DragTarget
             key={question.id}
-            id={question.id}
+            targetId={question.id}
             handleDragStart={handleDragStart}
             handleDrag={handleDrag}
             handleDragOver={handleDragOver}
