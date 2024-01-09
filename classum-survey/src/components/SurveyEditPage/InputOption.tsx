@@ -6,7 +6,6 @@ import type { OptionType } from "@stores";
 interface InputOptionProps {
   startIcon?: React.ReactNode;
   value: OptionType;
-  order: number;
   handleOptionChange: handleOptionChangeFuncType;
   handleOptionDelete: handleOptionDeleteFuncType;
 }
@@ -14,7 +13,6 @@ interface InputOptionProps {
 function InputOption({
   startIcon,
   value,
-  order,
   handleOptionChange,
   handleOptionDelete,
 }: InputOptionProps) {
@@ -25,10 +23,10 @@ function InputOption({
         hiddenLabel
         variant="standard"
         fullWidth
-        value={value.option}
-        onChange={(e) => handleOptionChange(e, order)}
+        value={value.text}
+        onChange={(e) => handleOptionChange(e, value.id)}
       />
-      <IconButton onClick={() => handleOptionDelete(order)}>
+      <IconButton onClick={() => handleOptionDelete(value.id)}>
         <CloseIcon />
       </IconButton>
     </Stack>

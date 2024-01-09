@@ -23,7 +23,6 @@ function SurveyEditPageDropdownAnswer({
           <div key={idx}>
             <InputOption
               startIcon={<span>{idx + 1}</span>}
-              order={idx}
               value={option}
               handleOptionChange={handleOptionChange}
               handleOptionDelete={handleOptionDelete}

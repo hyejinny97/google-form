@@ -5,8 +5,8 @@ import { Q_TYPE_MULTIPLE_CHOICE } from "@constants";
 import { genRandomNumber } from "@utils";
 
 export type OptionType = {
-  order: number;
-  option: string;
+  id: number;
+  text: string;
 };
 
 export interface QuestionType {
@@ -43,8 +43,8 @@ const defaultQuestion: QuestionType = {
   required: false,
   options: [
     {
-      order: 1,
-      option: "옵션 1",
+      id: 1,
+      text: "옵션 1",
     },
   ],
 };

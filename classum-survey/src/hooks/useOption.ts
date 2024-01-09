@@ -11,30 +11,30 @@ interface UseOptionProps {
 }
 
 function useOption({ choiceOptions, setChoiceOptions }: UseOptionProps) {
-  const handleOptionChange: handleOptionChangeFuncType = (e, order) => {
-    const newChoiceOptions = choiceOptions.map((option, idx) => {
-      if (idx === order) return { order, option: e.target.value };
+  const handleOptionChange: handleOptionChangeFuncType = (e, id) => {
+    const newChoiceOptions = choiceOptions.map((option) => {
+      if (option.id === id) return { id, text: e.target.value };
       return option;
     });
 
     setChoiceOptions(newChoiceOptions);
   };
 
-  const handleOptionDelete: handleOptionDeleteFuncType = (order) => {
-    const newChoiceOptions = choiceOptions.filter((option, idx) => {
-      if (idx === order) return;
-      return { ...option, order: idx < order ? idx : idx - 1 };
+  const handleOptionDelete: handleOptionDeleteFuncType = (id) => {
+    const newChoiceOptions = choiceOptions.filter((option) => {
+      if (option.id !== id) return option;
     });
 
     setChoiceOptions(newChoiceOptions);
   };
 
   const handleOptionAdd: handleOptionAddFuncType = () => {
+    const newId = choiceOptions[choiceOptions.length - 1].id + 1;
     const newChoiceOptions = [
       ...choiceOptions,
       {
-        order: choiceOptions.length + 1,
-        option: `옵션 ${choiceOptions.length + 1}`,
+        id: newId,
+        text: `옵션 ${newId}`,
       },
     ];
 

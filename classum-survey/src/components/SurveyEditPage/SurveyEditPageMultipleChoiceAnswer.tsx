@@ -27,7 +27,6 @@ function SurveyEditPageMultipleChoiceAnswer({
           <div key={idx}>
             <InputOption
               startIcon={<PanoramaFishEyeIcon color="disabled" />}
-              order={idx}
               value={option}
               handleOptionChange={handleOptionChange}
               handleOptionDelete={handleOptionDelete}

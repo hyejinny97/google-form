@@ -3,7 +3,7 @@ import type { OptionType } from "@stores";
 
 interface CheckboxAnswerProps {
   options: Array<OptionType>;
-  value?: Array<number>; // 체크된 옵션들의 order
+  value?: Array<number>; // 체크된 옵션들의 id
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }
@@ -19,12 +19,12 @@ function CheckboxAnswer({
       {options.map((option: OptionType) => {
         return (
           <FormControlLabel
-            key={option.order}
-            label={option.option}
+            key={option.id}
+            label={option.text}
             control={
               <Checkbox
-                checked={value && value.includes(option.order)}
-                name={String(option.order)}
+                checked={value && value.includes(option.id)}
+                name={String(option.id)}
               />
             }
             disabled={disabled}
