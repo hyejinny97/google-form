@@ -22,17 +22,15 @@ function SurveyEditPageCheckboxAnswer({
 
   return (
     <Stack spacing={1}>
-      {choiceOptions.map((option, idx) => {
+      {choiceOptions.map((option) => {
         return (
-          <div key={idx}>
-            <InputOption
-              startIcon={<CheckBoxOutlineBlankIcon color="disabled" />}
-              order={idx}
-              value={option}
-              handleOptionChange={handleOptionChange}
-              handleOptionDelete={handleOptionDelete}
-            />
-          </div>
+          <InputOption
+            key={option.id}
+            startIcon={<CheckBoxOutlineBlankIcon color="disabled" />}
+            value={option}
+            handleOptionChange={handleOptionChange}
+            handleOptionDelete={handleOptionDelete}
+          />
         );
       })}
       <InputAdditionOption
