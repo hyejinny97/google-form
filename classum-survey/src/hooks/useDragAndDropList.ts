@@ -125,7 +125,9 @@ function useDragAndDropList({
     if (nextItem && finalDragTargetPosBottom >= nextItem.initOffsetBottom) {
       // 아래 item을 위로 올리기
       const move = currentItem.initOffsetTop - nextItem.initOffsetTop;
-      nextItem.element.style.top = `${move}px`;
+      nextItem.element.style.top = `${
+        parseInt(nextItem.element.style.top || "0") + move
+      }px`;
 
       // items 순서 수정
       items.current = [
@@ -151,7 +153,9 @@ function useDragAndDropList({
     if (prevItem && finalDragTargetPosTop <= prevItem.initOffsetTop) {
       // 위 item을 아래로 내리기
       const move = currentItem.initOffsetBottom - prevItem.initOffsetBottom;
-      prevItem.element.style.top = `${move}px`;
+      prevItem.element.style.top = `${
+        parseInt(prevItem.element.style.top || "0") + move
+      }px`;
 
       // items 순서 수정
       items.current = [
