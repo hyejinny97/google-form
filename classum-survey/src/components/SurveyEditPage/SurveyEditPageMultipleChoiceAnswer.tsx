@@ -48,7 +48,7 @@ function SurveyEditPageMultipleChoiceAnswer({
           return (
             <DragTarget
               key={option.id}
-              id={option.id}
+              targetId={option.id}
               handleDragStart={handleDragStart}
               handleDrag={handleDrag}
               handleDragOver={handleDragOver}
