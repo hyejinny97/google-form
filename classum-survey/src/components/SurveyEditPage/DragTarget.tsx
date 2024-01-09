@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled from "@emotion/styled";
 
 interface DragTargetProps {
@@ -13,17 +14,21 @@ const Target = styled.div`
   position: relative;
 `;
 
-function DragTarget({
-  targetId,
-  handleDragStart,
-  handleDrag,
-  handleDragOver,
-  handleDragEnd,
-  children,
-}: DragTargetProps) {
+const DragTarget = forwardRef(function (
+  {
+    targetId,
+    handleDragStart,
+    handleDrag,
+    handleDragOver,
+    handleDragEnd,
+    children,
+  }: DragTargetProps,
+  ref
+) {
   return (
     <Target
       className="draggable-item"
+      ref={ref as React.RefObject<HTMLDivElement>}
       data-id={targetId}
       draggable
       onDragStart={(e: React.DragEvent) => handleDragStart(e, targetId)}
@@ -34,6 +39,5 @@ function DragTarget({
       {children}
     </Target>
   );
-}
-
+});
 export default DragTarget;
