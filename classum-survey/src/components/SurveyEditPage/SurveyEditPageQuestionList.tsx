@@ -17,7 +17,7 @@ function SurveyEditPageQuestionList() {
   const dispatch = useDispatch();
   const questions = useSelector((state: RootState) => state.survey.questions);
 
-  const container = useRef<HTMLDivElement>(null);
+  const dragItems = useRef<Array<HTMLDivElement>>([]);
   const {
     handleGoDrag,
     handleDragStart,
@@ -25,18 +25,19 @@ function SurveyEditPageQuestionList() {
     handleDragOver,
     handleDragEnd,
   } = useDragAndDropList({
-    containerRef: container,
+    dragItemsRef: dragItems,
     data: questions,
     handleDataChange: (newData: Array<DataType>) =>
       dispatch(reorderQuestions(newData as Array<QuestionType>)),
   });
 
   return (
-    <DragContainer ref={container}>
-      {questions.map((question) => {
+    <DragContainer>
+      {questions.map((question, idx) => {
         return (
           <DragTarget
             key={question.id}
+            ref={(el: HTMLDivElement) => (dragItems.current[idx] = el)}
             targetId={question.id}
             handleDragStart={handleDragStart}
             handleDrag={handleDrag}
