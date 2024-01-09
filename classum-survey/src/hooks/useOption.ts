@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   handleOptionChangeFuncType,
   handleOptionDeleteFuncType,
@@ -11,6 +12,8 @@ interface UseOptionProps {
 }
 
 function useOption({ choiceOptions, setChoiceOptions }: UseOptionProps) {
+  const maxOptionId = useRef(1);
+
   const handleOptionChange: handleOptionChangeFuncType = (e, id) => {
     const newChoiceOptions = choiceOptions.map((option) => {
       if (option.id === id) return { id, text: e.target.value };
@@ -29,7 +32,8 @@ function useOption({ choiceOptions, setChoiceOptions }: UseOptionProps) {
   };
 
   const handleOptionAdd: handleOptionAddFuncType = () => {
-    const newId = choiceOptions[choiceOptions.length - 1].id + 1;
+    maxOptionId.current += 1;
+    const newId = maxOptionId.current;
     const newChoiceOptions = [
       ...choiceOptions,
       {
