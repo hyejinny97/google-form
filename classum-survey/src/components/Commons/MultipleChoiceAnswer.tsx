@@ -3,7 +3,7 @@ import type { OptionType } from "@stores";
 
 interface MultipleChoiceAnswerProps {
   options: Array<OptionType>;
-  value?: number; // option의 order
+  value?: number; // option의 id
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }
@@ -19,10 +19,10 @@ function MultipleChoiceAnswer({
       {options.map((option: OptionType) => {
         return (
           <FormControlLabel
-            key={option.order}
-            value={option.order}
+            key={option.id}
+            value={option.id}
             control={<Radio />}
-            label={option.option}
+            label={option.text}
             disabled={disabled}
           />
         );
