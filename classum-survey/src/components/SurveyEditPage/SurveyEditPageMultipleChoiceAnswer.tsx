@@ -1,11 +1,18 @@
+import { useRef } from "react";
 import { Stack } from "@mui/material";
 import {
   InputOption,
   InputAdditionOption,
   PanoramaFishEyeIcon,
+  DragContainer,
+  DragTarget,
 } from "@components";
-import { useOption } from "@hooks";
+import { useOption, useDragAndDropList } from "@hooks";
 import type { OptionType } from "@stores";
+
+type DataType = {
+  id: number;
+};
 
 interface SurveyEditPageMultipleChoiceAnswerProps {
   value: Array<OptionType>;
@@ -16,24 +23,48 @@ function SurveyEditPageMultipleChoiceAnswer({
   value: choiceOptions,
   onChange: setChoiceOptions,
 }: SurveyEditPageMultipleChoiceAnswerProps) {
+  const container = useRef<HTMLDivElement>(null);
   const { handleOptionChange, handleOptionDelete, handleOptionAdd } = useOption(
     { choiceOptions, setChoiceOptions }
   );
+  const {
+    handleGoDrag,
+    handleDragStart,
+    handleDrag,
+    handleDragOver,
+    handleDragEnd,
+  } = useDragAndDropList({
+    containerRef: container,
+    data: choiceOptions,
+    handleDataChange: (newData: Array<DataType>) => {
+      setChoiceOptions(newData as Array<OptionType>);
+    },
+  });
 
   return (
     <Stack spacing={1}>
-      {choiceOptions.map((option, idx) => {
-        return (
-          <div key={idx}>
-            <InputOption
-              startIcon={<PanoramaFishEyeIcon color="disabled" />}
-              value={option}
-              handleOptionChange={handleOptionChange}
-              handleOptionDelete={handleOptionDelete}
-            />
-          </div>
-        );
-      })}
+      <DragContainer ref={container}>
+        {choiceOptions.map((option) => {
+          return (
+            <DragTarget
+              key={option.id}
+              id={option.id}
+              handleDragStart={handleDragStart}
+              handleDrag={handleDrag}
+              handleDragOver={handleDragOver}
+              handleDragEnd={handleDragEnd}
+            >
+              <InputOption
+                startIcon={<PanoramaFishEyeIcon color="disabled" />}
+                value={option}
+                handleOptionChange={handleOptionChange}
+                handleOptionDelete={handleOptionDelete}
+                onGoDrag={handleGoDrag}
+              />
+            </DragTarget>
+          );
+        })}
+      </DragContainer>
       <InputAdditionOption
         startIcon={<PanoramaFishEyeIcon color="disabled" />}
         handleOptionAdd={handleOptionAdd}

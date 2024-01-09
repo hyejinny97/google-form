@@ -16,7 +16,10 @@ export {
 
 export { BOX_BORDER_RADIUS, BOX_PADDING, BOX_MARGIN } from "./UI";
 
-export { CLASSNAME_HORIZONTAL_INDICATOR } from "./className";
+export {
+  CLASSNAME_HORIZONTAL_INDICATOR,
+  CLASSNAME_VERTICAL_INDICATOR,
+} from "./className";
 
 export {
   PATH_SURVEY_EDIT,

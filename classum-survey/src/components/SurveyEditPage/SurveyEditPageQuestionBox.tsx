@@ -50,7 +50,7 @@ interface SurveyEditPageQuestionBoxProps {
 const QuestionBox = styled(SurveyQuestionBox)`
   position: relative;
 
-  &:hover .horizontal-indicator {
+  &:hover .${CLASSNAME_HORIZONTAL_INDICATOR} {
     display: block;
   }
 `;
