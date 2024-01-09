@@ -5,13 +5,13 @@ type DataType = {
 };
 
 interface useDragAndDropListProp {
-  containerRef: React.RefObject<HTMLDivElement>;
+  dragItemsRef: React.RefObject<Array<HTMLDivElement>>;
   data: Array<DataType>;
   handleDataChange: (newData: Array<DataType>) => void;
 }
 
 function useDragAndDropList({
-  containerRef,
+  dragItemsRef,
   data,
   handleDataChange,
 }: useDragAndDropListProp) {
@@ -52,8 +52,7 @@ function useDragAndDropList({
     draggedItemId.current = id;
 
     // container 내 모든 items의 offsetTop, offsetBottom 위치 구하기
-    const containerEl = containerRef.current;
-    const itemsEl = containerEl?.querySelectorAll(".draggable-item");
+    const itemsEl = dragItemsRef.current;
     if (!itemsEl) return;
 
     items.current = [...itemsEl].map((el, idx) => {
