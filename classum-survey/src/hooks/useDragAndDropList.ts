@@ -5,13 +5,13 @@ type DataType = {
 };
 
 interface useDragAndDropListProp {
-  containerRef: React.RefObject<HTMLDivElement>;
+  dragItemsRef: React.RefObject<Array<HTMLDivElement>>;
   data: Array<DataType>;
   handleDataChange: (newData: Array<DataType>) => void;
 }
 
 function useDragAndDropList({
-  containerRef,
+  dragItemsRef,
   data,
   handleDataChange,
 }: useDragAndDropListProp) {
@@ -52,8 +52,7 @@ function useDragAndDropList({
     draggedItemId.current = id;
 
     // container 내 모든 items의 offsetTop, offsetBottom 위치 구하기
-    const containerEl = containerRef.current;
-    const itemsEl = containerEl?.querySelectorAll(".draggable-item");
+    const itemsEl = dragItemsRef.current;
     if (!itemsEl) return;
 
     items.current = [...itemsEl].map((el, idx) => {
@@ -125,7 +124,9 @@ function useDragAndDropList({
     if (nextItem && finalDragTargetPosBottom >= nextItem.initOffsetBottom) {
       // 아래 item을 위로 올리기
       const move = currentItem.initOffsetTop - nextItem.initOffsetTop;
-      nextItem.element.style.top = `${move}px`;
+      nextItem.element.style.top = `${
+        parseInt(nextItem.element.style.top || "0") + move
+      }px`;
 
       // items 순서 수정
       items.current = [
@@ -151,7 +152,9 @@ function useDragAndDropList({
     if (prevItem && finalDragTargetPosTop <= prevItem.initOffsetTop) {
       // 위 item을 아래로 내리기
       const move = currentItem.initOffsetBottom - prevItem.initOffsetBottom;
-      prevItem.element.style.top = `${move}px`;
+      prevItem.element.style.top = `${
+        parseInt(prevItem.element.style.top || "0") + move
+      }px`;
 
       // items 순서 수정
       items.current = [
