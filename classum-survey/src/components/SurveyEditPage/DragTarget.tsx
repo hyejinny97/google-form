@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 interface DragTargetProps {
-  id: number;
+  targetId: number;
   handleDragStart: (e: React.DragEvent, id: number) => void;
   handleDrag: (e: React.DragEvent) => void;
   handleDragOver: (e: React.DragEvent) => void;
@@ -14,7 +14,7 @@ const Target = styled.div`
 `;
 
 function DragTarget({
-  id,
+  targetId,
   handleDragStart,
   handleDrag,
   handleDragOver,
@@ -24,9 +24,9 @@ function DragTarget({
   return (
     <Target
       className="draggable-item"
-      data-id={id}
+      data-id={targetId}
       draggable
-      onDragStart={(e: React.DragEvent) => handleDragStart(e, id)}
+      onDragStart={(e: React.DragEvent) => handleDragStart(e, targetId)}
       onDrag={handleDrag}
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
