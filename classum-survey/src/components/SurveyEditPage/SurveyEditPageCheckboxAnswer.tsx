@@ -23,7 +23,7 @@ function SurveyEditPageCheckboxAnswer({
   value: choiceOptions,
   onChange: setChoiceOptions,
 }: SurveyEditPageCheckboxAnswerProps) {
-  const container = useRef<HTMLDivElement>(null);
+  const dragItems = useRef<Array<HTMLDivElement>>([]);
   const { handleOptionChange, handleOptionDelete, handleOptionAdd } = useOption(
     { choiceOptions, setChoiceOptions }
   );
@@ -34,7 +34,7 @@ function SurveyEditPageCheckboxAnswer({
     handleDragOver,
     handleDragEnd,
   } = useDragAndDropList({
-    containerRef: container,
+    dragItemsRef: dragItems,
     data: choiceOptions,
     handleDataChange: (newData: Array<DataType>) => {
       setChoiceOptions(newData as Array<OptionType>);
@@ -43,11 +43,12 @@ function SurveyEditPageCheckboxAnswer({
 
   return (
     <Stack spacing={1}>
-      <DragContainer ref={container}>
-        {choiceOptions.map((option) => {
+      <DragContainer>
+        {choiceOptions.map((option, idx) => {
           return (
             <DragTarget
               key={option.id}
+              ref={(el: HTMLDivElement) => (dragItems.current[idx] = el)}
               targetId={option.id}
               handleDragStart={handleDragStart}
               handleDrag={handleDrag}
