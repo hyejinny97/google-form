@@ -33,13 +33,11 @@ export {
   QuestionTypeSelect,
   InputOption,
   InputAdditionOption,
-  SurveyEditPageMultipleChoiceAnswer,
-  SurveyEditPageCheckboxAnswer,
-  SurveyEditPageDropdownAnswer,
   SurveyEditPageUtilBox,
   SurveyEditPageQuestionList,
   DragContainer,
   DragTarget,
+  SurveyEditPageInputOptionAnswer,
 } from "./SurveyEditPage";
 
 export {

@@ -3,10 +3,8 @@ export { default as SurveyEditPageQuestionBox } from "./SurveyEditPageQuestionBo
 export { default as QuestionTypeSelect } from "./QuestionTypeSelect";
 export { default as InputOption } from "./InputOption";
 export { default as InputAdditionOption } from "./InputAdditionOption";
-export { default as SurveyEditPageMultipleChoiceAnswer } from "./SurveyEditPageMultipleChoiceAnswer";
-export { default as SurveyEditPageCheckboxAnswer } from "./SurveyEditPageCheckboxAnswer";
-export { default as SurveyEditPageDropdownAnswer } from "./SurveyEditPageDropdownAnswer";
 export { default as SurveyEditPageUtilBox } from "./SurveyEditPageUtilBox";
 export { default as SurveyEditPageQuestionList } from "./SurveyEditPageQuestionList";
 export { default as DragContainer } from "./DragContainer";
 export { default as DragTarget } from "./DragTarget";
+export { default as SurveyEditPageInputOptionAnswer } from "./SurveyEditPageInputOptionAnswer";

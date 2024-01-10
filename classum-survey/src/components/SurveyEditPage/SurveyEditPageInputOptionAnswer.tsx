@@ -3,26 +3,37 @@ import { Stack } from "@mui/material";
 import {
   InputOption,
   InputAdditionOption,
-  PanoramaFishEyeIcon,
   DragContainer,
   DragTarget,
+  CheckBoxOutlineBlankIcon,
+  PanoramaFishEyeIcon,
 } from "@components";
 import { useOption, useDragAndDropList } from "@hooks";
 import type { OptionType } from "@stores";
+import {
+  Q_TYPE_MULTIPLE_CHOICE,
+  Q_TYPE_CHECKBOX,
+  Q_TYPE_DROPDOWN,
+} from "@constants";
 
 type DataType = {
   id: number;
 };
 
-interface SurveyEditPageMultipleChoiceAnswerProps {
+interface SurveyEditPageInputOptionAnswerProp {
+  type:
+    | typeof Q_TYPE_CHECKBOX
+    | typeof Q_TYPE_DROPDOWN
+    | typeof Q_TYPE_MULTIPLE_CHOICE;
   value: Array<OptionType>;
   onChange: (newOptions: Array<OptionType>) => void;
 }
 
-function SurveyEditPageMultipleChoiceAnswer({
+function SurveyEditPageInputOptionAnswer({
+  type,
   value: choiceOptions,
   onChange: setChoiceOptions,
-}: SurveyEditPageMultipleChoiceAnswerProps) {
+}: SurveyEditPageInputOptionAnswerProp) {
   const dragItems = useRef<Array<HTMLDivElement>>([]);
   const { handleOptionChange, handleOptionDelete, handleOptionAdd } = useOption(
     { choiceOptions, setChoiceOptions }
@@ -41,6 +52,16 @@ function SurveyEditPageMultipleChoiceAnswer({
     },
   });
 
+  let startIcon: React.ReactNode;
+  switch (type) {
+    case Q_TYPE_CHECKBOX:
+      startIcon = <CheckBoxOutlineBlankIcon color="disabled" />;
+      break;
+    case Q_TYPE_MULTIPLE_CHOICE:
+      startIcon = <PanoramaFishEyeIcon color="disabled" />;
+      break;
+  }
+
   return (
     <Stack spacing={1}>
       <DragContainer>
@@ -56,7 +77,7 @@ function SurveyEditPageMultipleChoiceAnswer({
               handleDragEnd={handleDragEnd}
             >
               <InputOption
-                startIcon={<PanoramaFishEyeIcon color="disabled" />}
+                startIcon={startIcon || <span>{idx + 1}</span>}
                 value={option}
                 handleOptionChange={handleOptionChange}
                 handleOptionDelete={handleOptionDelete}
@@ -67,11 +88,11 @@ function SurveyEditPageMultipleChoiceAnswer({
         })}
       </DragContainer>
       <InputAdditionOption
-        startIcon={<PanoramaFishEyeIcon color="disabled" />}
+        startIcon={startIcon || <span>{choiceOptions.length + 1}</span>}
         handleOptionAdd={handleOptionAdd}
       />
     </Stack>
   );
 }
 
-export default SurveyEditPageMultipleChoiceAnswer;
+export default SurveyEditPageInputOptionAnswer;
