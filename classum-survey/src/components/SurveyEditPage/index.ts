@@ -10,3 +10,4 @@ export { default as SurveyEditPageUtilBox } from "./SurveyEditPageUtilBox";
 export { default as SurveyEditPageQuestionList } from "./SurveyEditPageQuestionList";
 export { default as DragContainer } from "./DragContainer";
 export { default as DragTarget } from "./DragTarget";
+export { default as SurveyEditPageInputOptionAnswer } from "./SurveyEditPageInputOptionAnswer";

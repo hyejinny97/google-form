@@ -40,6 +40,7 @@ export {
   SurveyEditPageQuestionList,
   DragContainer,
   DragTarget,
+  SurveyEditPageInputOptionAnswer,
 } from "./SurveyEditPage";
 
 export {
