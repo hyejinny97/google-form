@@ -16,19 +16,14 @@ import {
   QuestionTypeSelect,
   ShortAnswer,
   LongAnswer,
-  SurveyEditPageMultipleChoiceAnswer,
-  SurveyEditPageCheckboxAnswer,
-  SurveyEditPageDropdownAnswer,
   ContentCopyIcon,
   DeleteIcon,
   HorizontalDragIndicatorIcon,
+  SurveyEditPageInputOptionAnswer,
 } from "@components";
 import {
   Q_TYPE_SHORT,
   Q_TYPE_LONG,
-  Q_TYPE_MULTIPLE_CHOICE,
-  Q_TYPE_CHECKBOX,
-  Q_TYPE_DROPDOWN,
   BOX_PADDING,
   CLASSNAME_HORIZONTAL_INDICATOR,
 } from "@constants";
@@ -136,27 +131,15 @@ function SurveyEditPageQuestionBox({
   let renderBody;
   if (type === Q_TYPE_SHORT) renderBody = <ShortAnswer disabled />;
   else if (type === Q_TYPE_LONG) renderBody = <LongAnswer disabled />;
-  else if (type === Q_TYPE_MULTIPLE_CHOICE)
+  else {
     renderBody = (
-      <SurveyEditPageMultipleChoiceAnswer
+      <SurveyEditPageInputOptionAnswer
+        type={type}
         value={options as Array<OptionType>}
         onChange={handleOptionsChange}
       />
     );
-  else if (type === Q_TYPE_CHECKBOX)
-    renderBody = (
-      <SurveyEditPageCheckboxAnswer
-        value={options as Array<OptionType>}
-        onChange={handleOptionsChange}
-      />
-    );
-  else if (type === Q_TYPE_DROPDOWN)
-    renderBody = (
-      <SurveyEditPageDropdownAnswer
-        value={options as Array<OptionType>}
-        onChange={handleOptionsChange}
-      />
-    );
+  }
 
   return (
     <QuestionBox ref={questionBox}>
