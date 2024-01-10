@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => redirect("survey/edit"),
+        loader: () => redirect(PATH_SURVEY_EDIT),
       },
       {
         path: PATH_SURVEY_EDIT,
