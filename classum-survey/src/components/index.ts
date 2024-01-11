@@ -25,6 +25,7 @@ export {
   DragIndicatorIcon,
   VerticalDragIndicatorIcon,
   HorizontalDragIndicatorIcon,
+  ErrorOutlineIcon,
 } from "./Icons";
 
 export {

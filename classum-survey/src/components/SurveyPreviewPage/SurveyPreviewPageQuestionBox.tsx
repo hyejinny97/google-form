@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { Box, Stack } from "@mui/material";
 import {
   SurveyQuestionBox,
   SurveyPreviewPageShortAnswer,
@@ -8,6 +8,7 @@ import {
   SurveyPreviewPageMultipleChoiceAnswer,
   SurveyPreviewPageCheckboxAnswer,
   SurveyPreviewPageDropdownAnswer,
+  ErrorOutlineIcon,
 } from "@components";
 import type { QuestionType } from "@stores";
 import {
@@ -16,6 +17,7 @@ import {
   Q_TYPE_MULTIPLE_CHOICE,
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
+  COLOR_ERROR,
 } from "@constants";
 import type { OptionType } from "@stores";
 
@@ -62,7 +64,16 @@ function SurveyPreviewPageQuestionBox({
     );
 
   return (
-    <SurveyQuestionBox>
+    <SurveyQuestionBox
+      borderColor={COLOR_ERROR}
+      description={
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <ErrorOutlineIcon />
+          <p>필수 질문입니다.</p>
+        </Stack>
+      }
+      descriptionColor={COLOR_ERROR}
+    >
       <Stack direction="row" spacing={1}>
         <Box sx={{ fontSize: 20 }}>{title}</Box>
         {required && <Box sx={{ color: theme.palette.error.main }}>*</Box>}
