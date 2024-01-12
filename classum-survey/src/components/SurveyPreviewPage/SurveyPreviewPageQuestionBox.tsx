@@ -58,7 +58,13 @@ function SurveyPreviewPageQuestionBox({
       />
     );
   else if (type === Q_TYPE_LONG)
-    renderBody = <SurveyPreviewPageLongAnswer disabled={disabled} />;
+    renderBody = (
+      <SurveyPreviewPageLongAnswer
+        value={(answerData as string) || ""}
+        onChange={handleTextAnswerChange}
+        disabled={disabled}
+      />
+    );
   else if (type === Q_TYPE_MULTIPLE_CHOICE)
     renderBody = (
       <SurveyPreviewPageMultipleChoiceAnswer
