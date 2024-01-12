@@ -18,11 +18,15 @@ export const surveyPreviewAnswerSlice = createSlice({
       state,
       action: PayloadAction<SurveyPreviewAnswerType>
     ) {
-      const idx = state.findIndex(
+      const currentQuestion = state.find(
         (question) => question.questionId === action.payload.questionId
       );
-      if (idx > 0) {
-        state[idx] = action.payload;
+      if (currentQuestion) {
+        return state.map((question) => {
+          if (question.questionId === action.payload.questionId)
+            return action.payload;
+          return question;
+        });
       } else {
         state.push(action.payload);
       }
