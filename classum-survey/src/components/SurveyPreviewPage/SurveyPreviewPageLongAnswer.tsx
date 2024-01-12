@@ -1,22 +1,17 @@
-import { useState } from "react";
 import { LongAnswer } from "@components";
 
 interface SurveyPreviewPageLongAnswerProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }
 
 function SurveyPreviewPageLongAnswer({
+  value,
+  onChange,
   disabled,
 }: SurveyPreviewPageLongAnswerProps) {
-  const [text, setText] = useState("");
-
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-  };
-
-  return (
-    <LongAnswer value={text} onChange={handleTextChange} disabled={disabled} />
-  );
+  return <LongAnswer value={value} onChange={onChange} disabled={disabled} />;
 }
 
 export default SurveyPreviewPageLongAnswer;
