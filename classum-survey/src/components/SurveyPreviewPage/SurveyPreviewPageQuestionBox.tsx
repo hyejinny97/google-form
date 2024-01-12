@@ -60,6 +60,23 @@ function SurveyPreviewPageQuestionBox({
     );
   };
 
+  const handleCheckboxAnswerChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const isChecked = e.target.checked;
+    const value = Number(e.target.name);
+    const prevAnswerData = (answerData as Array<number>) || [];
+
+    dispatch(
+      updateSurveyPreviewAnswer({
+        questionId: id,
+        answer: isChecked
+          ? [...prevAnswerData, value]
+          : prevAnswerData.filter((sel) => sel !== value),
+      })
+    );
+  };
+
   let renderBody;
   if (type === Q_TYPE_SHORT)
     renderBody = (
@@ -90,6 +107,8 @@ function SurveyPreviewPageQuestionBox({
     renderBody = (
       <SurveyPreviewPageCheckboxAnswer
         options={options as Array<OptionType>}
+        value={(answerData as Array<number>) || [-1]}
+        onChange={handleCheckboxAnswerChange}
         disabled={disabled}
       />
     );
