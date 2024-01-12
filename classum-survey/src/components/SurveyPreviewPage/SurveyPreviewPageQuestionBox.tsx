@@ -10,7 +10,7 @@ import {
   SurveyPreviewPageDropdownAnswer,
   ErrorOutlineIcon,
 } from "@components";
-import type { QuestionType } from "@stores";
+import type { QuestionType, AnswerType } from "@stores";
 import {
   Q_TYPE_SHORT,
   Q_TYPE_LONG,
@@ -20,9 +20,11 @@ import {
   COLOR_ERROR,
 } from "@constants";
 import type { OptionType } from "@stores";
+import { useIsMounted } from "@hooks";
 
 interface SurveyPreviewPageQuestionBoxProps {
-  data: QuestionType;
+  questionData: QuestionType;
+  answerData?: AnswerType;
   disabled?: boolean;
 }
 
@@ -31,10 +33,12 @@ const Body = styled.div`
 `;
 
 function SurveyPreviewPageQuestionBox({
-  data: { id, title, type, required, options },
+  questionData: { id, title, type, required, options },
+  answerData,
   disabled,
 }: SurveyPreviewPageQuestionBoxProps) {
   const theme = useTheme();
+  const isMounted = useIsMounted();
 
   let renderBody;
   if (type === Q_TYPE_SHORT)
