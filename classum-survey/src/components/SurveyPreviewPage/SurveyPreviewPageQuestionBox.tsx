@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import { useTheme } from "@mui/material/styles";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, SelectChangeEvent } from "@mui/material";
 import {
   SurveyQuestionBox,
   SurveyPreviewPageShortAnswer,
@@ -77,6 +77,15 @@ function SurveyPreviewPageQuestionBox({
     );
   };
 
+  const handleDropdownAnswerChange = (e: SelectChangeEvent) => {
+    dispatch(
+      updateSurveyPreviewAnswer({
+        questionId: id,
+        answer: Number(e.target.value),
+      })
+    );
+  };
+
   let renderBody;
   if (type === Q_TYPE_SHORT)
     renderBody = (
@@ -116,6 +125,8 @@ function SurveyPreviewPageQuestionBox({
     renderBody = (
       <SurveyPreviewPageDropdownAnswer
         options={options as Array<OptionType>}
+        value={(answerData as number) || -1}
+        onChange={handleDropdownAnswerChange}
         disabled={disabled}
       />
     );
