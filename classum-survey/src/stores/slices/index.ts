@@ -20,4 +20,11 @@ export {
   goBackSurvey,
 } from "./isSurveySubmittedSlice";
 
+export {
+  default as surveyPreviewAnswerReducer,
+  surveyPreviewAnswerSlice,
+  updateSurveyPreviewAnswer,
+} from "./surveyPreviewAnswerSlice";
+
 export type { QuestionType, OptionType } from "./surveySlice";
+export type { AnswerType } from "./surveyPreviewAnswerSlice";
