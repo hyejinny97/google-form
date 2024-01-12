@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import { useTheme } from "@mui/material/styles";
 import { Box, Stack } from "@mui/material";
@@ -10,7 +11,8 @@ import {
   SurveyPreviewPageDropdownAnswer,
   ErrorOutlineIcon,
 } from "@components";
-import type { QuestionType, AnswerType } from "@stores";
+import { updateSurveyPreviewAnswer } from "@stores";
+import type { QuestionType, OptionType, AnswerType } from "@stores";
 import {
   Q_TYPE_SHORT,
   Q_TYPE_LONG,
@@ -19,7 +21,6 @@ import {
   Q_TYPE_DROPDOWN,
   COLOR_ERROR,
 } from "@constants";
-import type { OptionType } from "@stores";
 import { useIsMounted } from "@hooks";
 
 interface SurveyPreviewPageQuestionBoxProps {
@@ -38,11 +39,24 @@ function SurveyPreviewPageQuestionBox({
   disabled,
 }: SurveyPreviewPageQuestionBoxProps) {
   const theme = useTheme();
+  const dispatch = useDispatch();
   const isMounted = useIsMounted();
+
+  const handleTextAnswerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      updateSurveyPreviewAnswer({ questionId: id, answer: e.target.value })
+    );
+  };
 
   let renderBody;
   if (type === Q_TYPE_SHORT)
-    renderBody = <SurveyPreviewPageShortAnswer disabled={disabled} />;
+    renderBody = (
+      <SurveyPreviewPageShortAnswer
+        value={(answerData as string) || ""}
+        onChange={handleTextAnswerChange}
+        disabled={disabled}
+      />
+    );
   else if (type === Q_TYPE_LONG)
     renderBody = <SurveyPreviewPageLongAnswer disabled={disabled} />;
   else if (type === Q_TYPE_MULTIPLE_CHOICE)
