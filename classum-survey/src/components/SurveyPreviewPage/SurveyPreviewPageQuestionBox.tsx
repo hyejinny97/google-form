@@ -4,12 +4,12 @@ import { useTheme } from "@mui/material/styles";
 import { Box, Stack, SelectChangeEvent } from "@mui/material";
 import {
   SurveyQuestionBox,
+  RequiredSurveyQuestionBox,
   SurveyPreviewPageShortAnswer,
   SurveyPreviewPageLongAnswer,
   SurveyPreviewPageMultipleChoiceAnswer,
   SurveyPreviewPageCheckboxAnswer,
   SurveyPreviewPageDropdownAnswer,
-  ErrorOutlineIcon,
 } from "@components";
 import { updateSurveyPreviewAnswer } from "@stores";
 import type { QuestionType, OptionType, AnswerType } from "@stores";
@@ -19,7 +19,6 @@ import {
   Q_TYPE_MULTIPLE_CHOICE,
   Q_TYPE_CHECKBOX,
   Q_TYPE_DROPDOWN,
-  COLOR_ERROR,
 } from "@constants";
 import { useIsMounted } from "@hooks";
 
@@ -41,7 +40,10 @@ function SurveyPreviewPageQuestionBox({
   const theme = useTheme();
   const dispatch = useDispatch();
   const isMounted = useIsMounted();
-  console.log("answerData: ", answerData);
+  const showRequireMessage =
+    isMounted &&
+    required &&
+    (Array.isArray(answerData) ? !answerData.length : !answerData);
 
   const handleTextAnswerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
@@ -131,23 +133,18 @@ function SurveyPreviewPageQuestionBox({
       />
     );
 
+  const QuestionBox = showRequireMessage
+    ? RequiredSurveyQuestionBox
+    : SurveyQuestionBox;
+
   return (
-    <SurveyQuestionBox
-      borderColor={COLOR_ERROR}
-      description={
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <ErrorOutlineIcon />
-          <p>필수 질문입니다.</p>
-        </Stack>
-      }
-      descriptionColor={COLOR_ERROR}
-    >
+    <QuestionBox>
       <Stack direction="row" spacing={1}>
         <Box sx={{ fontSize: 20 }}>{title}</Box>
         {required && <Box sx={{ color: theme.palette.error.main }}>*</Box>}
       </Stack>
       <Body>{renderBody}</Body>
-    </SurveyQuestionBox>
+    </QuestionBox>
   );
 }
 
