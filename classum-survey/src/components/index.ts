@@ -6,6 +6,7 @@ export {
   MultipleChoiceAnswer,
   CheckboxAnswer,
   DropdownAnswer,
+  RequiredSurveyQuestionBox,
 } from "./Commons";
 
 export {
