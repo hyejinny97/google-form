@@ -41,10 +41,22 @@ function SurveyPreviewPageQuestionBox({
   const theme = useTheme();
   const dispatch = useDispatch();
   const isMounted = useIsMounted();
+  console.log("answerData: ", answerData);
 
   const handleTextAnswerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
       updateSurveyPreviewAnswer({ questionId: id, answer: e.target.value })
+    );
+  };
+
+  const handleMultipleChoiceAnswerChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    dispatch(
+      updateSurveyPreviewAnswer({
+        questionId: id,
+        answer: Number(e.target.value),
+      })
     );
   };
 
@@ -69,6 +81,8 @@ function SurveyPreviewPageQuestionBox({
     renderBody = (
       <SurveyPreviewPageMultipleChoiceAnswer
         options={options as Array<OptionType>}
+        value={(answerData as number) || -1}
+        onChange={handleMultipleChoiceAnswerChange}
         disabled={disabled}
       />
     );
