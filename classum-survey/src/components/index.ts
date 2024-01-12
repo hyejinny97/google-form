@@ -6,6 +6,7 @@ export {
   MultipleChoiceAnswer,
   CheckboxAnswer,
   DropdownAnswer,
+  RequiredSurveyQuestionBox,
 } from "./Commons";
 
 export {
@@ -25,6 +26,7 @@ export {
   DragIndicatorIcon,
   VerticalDragIndicatorIcon,
   HorizontalDragIndicatorIcon,
+  ErrorOutlineIcon,
 } from "./Icons";
 
 export {

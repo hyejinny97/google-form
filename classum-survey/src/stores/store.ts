@@ -4,12 +4,15 @@ import {
   surveySlice,
   isSurveySubmittedReducer,
   isSurveySubmittedSlice,
+  surveyPreviewAnswerReducer,
+  surveyPreviewAnswerSlice,
 } from "./slices";
 
 const store = configureStore({
   reducer: {
     [surveySlice.name]: surveyReducer,
     [isSurveySubmittedSlice.name]: isSurveySubmittedReducer,
+    [surveyPreviewAnswerSlice.name]: surveyPreviewAnswerReducer,
   },
 });
 

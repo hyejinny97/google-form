@@ -5,3 +5,4 @@ export { default as LongAnswer } from "./LongAnswer";
 export { default as MultipleChoiceAnswer } from "./MultipleChoiceAnswer";
 export { default as CheckboxAnswer } from "./CheckboxAnswer";
 export { default as DropdownAnswer } from "./DropdownAnswer";
+export { default as RequiredSurveyQuestionBox } from "./RequiredSurveyQuestionBox";

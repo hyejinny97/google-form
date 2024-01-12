@@ -1,26 +1,17 @@
-import { useState } from "react";
 import { ShortAnswer } from "@components";
 
 interface SurveyPreviewPageShortAnswerProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }
 
 function SurveyPreviewPageShortAnswer({
+  value,
+  onChange,
   disabled,
 }: SurveyPreviewPageShortAnswerProps) {
-  const [text, setText] = useState("");
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-  };
-
-  return (
-    <ShortAnswer
-      value={text}
-      onChange={handleInputChange}
-      disabled={disabled}
-    />
-  );
+  return <ShortAnswer value={value} onChange={onChange} disabled={disabled} />;
 }
 
 export default SurveyPreviewPageShortAnswer;

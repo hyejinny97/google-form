@@ -14,3 +14,4 @@ export { default as EditIcon } from "@mui/icons-material/Edit";
 export { default as DragIndicatorIcon } from "@mui/icons-material/DragIndicator";
 export { default as VerticalDragIndicatorIcon } from "./VerticalDragIndicatorIcon";
 export { default as HorizontalDragIndicatorIcon } from "./HorizontalDragIndicatorIcon";
+export { default as ErrorOutlineIcon } from "@mui/icons-material/ErrorOutline";

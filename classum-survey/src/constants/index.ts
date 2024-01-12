@@ -14,6 +14,15 @@ export {
   TITLE_BOX_TITLE_DESC_MARGIN,
 } from "./SurveyEditPage";
 
+export {
+  COLOR_PRIMARY,
+  COLOR_SECONDARY,
+  COLOR_ERROR,
+  COLOR_WARNING,
+  COLOR_INFO,
+  COLOR_SUCCESS,
+} from "./SurveyPreviewPage";
+
 export { BOX_BORDER_RADIUS, BOX_PADDING, BOX_MARGIN } from "./UI";
 
 export {
