@@ -1,15 +1,11 @@
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { goBackSurvey } from "@stores";
 import { PATH_SURVEY_PREVIEW } from "@constants";
 
 function SurveyGoBackButton() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    dispatch(goBackSurvey());
     navigate(PATH_SURVEY_PREVIEW);
   };
 

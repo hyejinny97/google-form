@@ -11,6 +11,7 @@ import {
   PATH_SURVEY_PREVIEW,
   PATH_SURVEY_PREVIEW_SUBMIT,
 } from "@constants";
+import { store, submitSurvey, goBackSurvey } from "@stores";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +32,12 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            loader: () => store.dispatch(goBackSurvey()),
             element: <SurveyPreviewFooter />,
           },
           {
             path: PATH_SURVEY_PREVIEW_SUBMIT,
+            loader: () => store.dispatch(submitSurvey()),
             element: <SurveySubmitFooter />,
           },
         ],
