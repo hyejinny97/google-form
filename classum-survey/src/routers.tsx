@@ -5,6 +5,7 @@ import {
   SurveyPreviewPage,
   SurveyPreviewFooter,
   SurveySubmitFooter,
+  surveyPreviewPageAction,
 } from "@pages";
 import {
   PATH_SURVEY_EDIT,
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: PATH_SURVEY_PREVIEW,
+        action: surveyPreviewPageAction,
         element: <SurveyPreviewPage />,
         children: [
           {
