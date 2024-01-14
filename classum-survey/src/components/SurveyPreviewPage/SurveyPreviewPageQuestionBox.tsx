@@ -1,3 +1,4 @@
+import { useActionData } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import { useTheme } from "@mui/material/styles";
@@ -11,6 +12,7 @@ import {
   SurveyPreviewPageCheckboxAnswer,
   SurveyPreviewPageDropdownAnswer,
 } from "@components";
+import type { SurveyPreviewPageActionDataType } from "@pages";
 import { updateSurveyPreviewAnswer } from "@stores";
 import type { QuestionType, OptionType, AnswerType } from "@stores";
 import {
@@ -40,8 +42,10 @@ function SurveyPreviewPageQuestionBox({
   const theme = useTheme();
   const dispatch = useDispatch();
   const isMounted = useIsMounted();
+  const actionData = useActionData() as SurveyPreviewPageActionDataType;
+
   const showRequireMessage =
-    isMounted &&
+    (isMounted || actionData?.showRequiredQuestions) &&
     required &&
     (Array.isArray(answerData) ? !answerData.length : !answerData);
 
