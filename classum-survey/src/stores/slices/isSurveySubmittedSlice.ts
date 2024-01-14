@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PATH_SURVEY_PREVIEW_SUBMIT } from "@constants";
 
 export const isSurveySubmittedSlice = createSlice({
   name: "isSurveySubmitted",
-  initialState: location.pathname === PATH_SURVEY_PREVIEW_SUBMIT,
+  initialState: false,
   reducers: {
     submitSurvey() {
       return true;
