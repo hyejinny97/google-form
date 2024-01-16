@@ -26,5 +26,9 @@ export {
   updateSurveyPreviewAnswer,
 } from "./surveyPreviewAnswerSlice";
 
-export type { QuestionType, OptionType } from "./surveySlice";
+export type {
+  QuestionType,
+  OptionType,
+  UpdateQuestionActionPayloadType,
+} from "./surveySlice";
 export type { AnswerType } from "./surveyPreviewAnswerSlice";

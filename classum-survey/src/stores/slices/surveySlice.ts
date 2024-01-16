@@ -23,7 +23,7 @@ interface InitialStateType {
   questions: Array<QuestionType>;
 }
 
-interface UpdateQuestionActionPayloadType<T> {
+export interface UpdateQuestionActionPayloadType<T> {
   questionId: number;
   data: T extends "title"
     ? string
