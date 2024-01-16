@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { QuestionTypes } from "questionTypes";
 import styled from "@emotion/styled";
@@ -30,10 +30,10 @@ import {
 import {
   deleteQuestion,
   duplicateQuestion,
-  updateQuestionTitle,
+  tryUpdateQuestionTitle,
   updateQuestionType,
   updateQuestionRequired,
-  updateQuestionOptions,
+  tryUpdateQuestionOptions,
 } from "@stores";
 import type { QuestionType, OptionType } from "@stores";
 
@@ -75,9 +75,11 @@ const HorizontalIndicator = styled(HorizontalDragIndicatorIcon)`
 `;
 
 function SurveyEditPageQuestionBox({
-  data: { id, title, type, required, options },
+  data: { id, title: initialTitle, type, required, options: initialOptions },
   onGoDrag,
 }: SurveyEditPageQuestionBoxProps) {
+  const [questionTitleText, setQuestionTitleText] = useState(initialTitle);
+  const [options, setOptions] = useState(initialOptions);
   const questionBox = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
@@ -104,7 +106,8 @@ function SurveyEditPageQuestionBox({
   }, []);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateQuestionTitle({ questionId: id, data: e.target.value }));
+    dispatch(tryUpdateQuestionTitle({ questionId: id, data: e.target.value }));
+    setQuestionTitleText(e.target.value);
   };
 
   const handleSelectChange = (e: SelectChangeEvent) => {
@@ -125,7 +128,8 @@ function SurveyEditPageQuestionBox({
   };
 
   const handleOptionsChange = (newOptions: Array<OptionType>) => {
-    dispatch(updateQuestionOptions({ questionId: id, data: newOptions }));
+    dispatch(tryUpdateQuestionOptions({ questionId: id, data: newOptions }));
+    setOptions(newOptions);
   };
 
   let renderBody;
@@ -148,7 +152,7 @@ function SurveyEditPageQuestionBox({
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <TextField
-              value={title}
+              value={questionTitleText}
               onChange={handleTitleChange}
               variant="filled"
               placeholder="질문"
