@@ -17,6 +17,7 @@ export {
   // surveyPreviewAnswerSlice의 actions
   updateSurveyPreviewAnswer,
 } from "./slices";
+export { tryUpdateSurveyTitle, tryUpdateSurveyTitleDesc } from "./actions";
 
 export type { RootState } from "./store";
 export type { QuestionType, OptionType, AnswerType } from "./slices";
