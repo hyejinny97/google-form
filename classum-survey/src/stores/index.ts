@@ -16,6 +16,7 @@ export {
   goBackSurvey,
   // surveyPreviewAnswerSlice의 actions
   updateSurveyPreviewAnswer,
+  clearSurveyPreviewAnswer,
 } from "./slices";
 export {
   tryUpdateSurveyTitle,
