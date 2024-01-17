@@ -74,7 +74,7 @@ const HorizontalIndicator = styled(HorizontalDragIndicatorIcon)`
   cursor: pointer;
 `;
 
-function SurveyEditPageQuestionBox({
+function TempSurveyEditPageQuestionBox({
   data: { id, title: initialTitle, type, required, options: initialOptions },
   onGoDrag,
 }: SurveyEditPageQuestionBoxProps) {
@@ -193,5 +193,20 @@ function SurveyEditPageQuestionBox({
     </QuestionBox>
   );
 }
+
+const propsAreEqual = (
+  prevProps: SurveyEditPageQuestionBoxProps,
+  nextProps: SurveyEditPageQuestionBoxProps
+) => {
+  return (
+    prevProps.data === nextProps.data &&
+    prevProps.onGoDrag === nextProps.onGoDrag
+  );
+};
+
+const SurveyEditPageQuestionBox = React.memo(
+  TempSurveyEditPageQuestionBox,
+  propsAreEqual
+);
 
 export default SurveyEditPageQuestionBox;
