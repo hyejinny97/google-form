@@ -12,4 +12,8 @@ const setSessionStorage = (key: string, value: any) => {
   return sessionStorage.getItem(key);
 };
 
-export { getSessionStorage, setSessionStorage };
+const deleteSessionStorage = (key: string) => {
+  sessionStorage.removeItem(key);
+};
+
+export { getSessionStorage, setSessionStorage, deleteSessionStorage };
