@@ -59,8 +59,7 @@ const name = "survey";
 
 export const surveySlice = createSlice({
   name,
-  initialState:
-    (getSessionStorage(name) as typeof initialState) || initialState,
+  initialState: (getSessionStorage(name) as InitialStateType) || initialState,
   reducers: {
     updateSurveyTitle(state, action: PayloadAction<string>) {
       state.surveyTitle = action.payload;
