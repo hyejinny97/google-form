@@ -24,6 +24,7 @@ export {
   default as surveyPreviewAnswerReducer,
   surveyPreviewAnswerSlice,
   updateSurveyPreviewAnswer,
+  clearSurveyPreviewAnswer,
 } from "./surveyPreviewAnswerSlice";
 
 export type {

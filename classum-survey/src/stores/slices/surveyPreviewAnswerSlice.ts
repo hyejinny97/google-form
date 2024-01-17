@@ -35,8 +35,12 @@ export const surveyPreviewAnswerSlice = createSlice({
         state.push(action.payload);
       }
     },
+    clearSurveyPreviewAnswer(state) {
+      state.splice(0, state.length);
+    },
   },
 });
 
-export const { updateSurveyPreviewAnswer } = surveyPreviewAnswerSlice.actions;
+export const { updateSurveyPreviewAnswer, clearSurveyPreviewAnswer } =
+  surveyPreviewAnswerSlice.actions;
 export default surveyPreviewAnswerSlice.reducer;
