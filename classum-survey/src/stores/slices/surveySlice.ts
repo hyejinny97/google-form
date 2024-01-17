@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { QuestionTypes } from "questionTypes";
 import { Q_TYPE_MULTIPLE_CHOICE } from "@constants";
-import { genRandomNumber } from "@utils";
+import { genRandomNumber, getSessionStorage } from "@utils";
 
 export type OptionType = {
   id: number;
@@ -55,9 +55,11 @@ const initialState: InitialStateType = {
   questions: [defaultQuestion],
 };
 
+const name = "survey";
+
 export const surveySlice = createSlice({
-  name: "survey",
-  initialState,
+  name,
+  initialState: (getSessionStorage(name) as InitialStateType) || initialState,
   reducers: {
     updateSurveyTitle(state, action: PayloadAction<string>) {
       state.surveyTitle = action.payload;
