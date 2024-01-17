@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, QuestionType } from "@stores";
 import { reorderQuestions } from "@stores";
@@ -31,6 +31,8 @@ function SurveyEditPageQuestionList() {
       dispatch(reorderQuestions(newData as Array<QuestionType>)),
   });
 
+  const memoizedHandleGoDrag = useCallback(handleGoDrag, []);
+
   return (
     <DragContainer>
       {questions.map((question, idx) => {
@@ -46,7 +48,7 @@ function SurveyEditPageQuestionList() {
           >
             <SurveyEditPageQuestionBox
               data={question}
-              onGoDrag={handleGoDrag}
+              onGoDrag={memoizedHandleGoDrag}
             />
           </DragTarget>
         );
