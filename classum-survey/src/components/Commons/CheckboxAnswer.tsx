@@ -1,4 +1,4 @@
-import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import { FormGroup, FormControlLabel, Checkbox } from "@components";
 import type { OptionType } from "@stores";
 
 interface CheckboxAnswerProps {

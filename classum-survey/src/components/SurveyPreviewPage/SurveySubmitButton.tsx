@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button } from "@components";
 
 function SurveySubmitButton() {
   return (

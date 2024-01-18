@@ -10,8 +10,6 @@ import {
   Stack,
   IconButton,
   Switch,
-} from "@mui/material";
-import {
   SurveyQuestionBox,
   QuestionTypeSelect,
   ShortAnswer,

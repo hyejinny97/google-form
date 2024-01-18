@@ -1,5 +1,4 @@
-import { Stack } from "@mui/material";
-import { SurveyGoBackButton } from "@components";
+import { Stack, SurveyGoBackButton } from "@components";
 
 function SurveySubmitFooter() {
   return (

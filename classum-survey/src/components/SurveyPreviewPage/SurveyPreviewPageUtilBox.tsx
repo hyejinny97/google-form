@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
-import { Box, EditIcon } from "@components";
+import { Box, EditIcon, IconButton } from "@components";
 import { PATH_SURVEY_EDIT } from "@constants";
 
 interface SurveyPreviewPageUtilBox {

@@ -1,5 +1,4 @@
-import { Stack } from "@mui/material";
-import { SurveyQuestionBox, ErrorOutlineIcon } from "@components";
+import { SurveyQuestionBox, ErrorOutlineIcon, Stack } from "@components";
 import { COLOR_ERROR } from "@constants";
 
 interface RequiredSurveyQuestionBoxProp {
