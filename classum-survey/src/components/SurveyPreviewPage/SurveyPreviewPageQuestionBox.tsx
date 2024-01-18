@@ -3,8 +3,10 @@ import { useActionData } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import { useTheme } from "@mui/material/styles";
-import { Box, Stack, SelectChangeEvent } from "@mui/material";
 import {
+  MuiBox,
+  Stack,
+  SelectChangeEvent,
   SurveyQuestionBox,
   RequiredSurveyQuestionBox,
   SurveyPreviewPageShortAnswer,
@@ -145,8 +147,10 @@ function TempSurveyPreviewPageQuestionBox({
   return (
     <QuestionBox>
       <Stack direction="row" spacing={1}>
-        <Box sx={{ fontSize: 20 }}>{title}</Box>
-        {required && <Box sx={{ color: theme.palette.error.main }}>*</Box>}
+        <MuiBox sx={{ fontSize: 20 }}>{title}</MuiBox>
+        {required && (
+          <MuiBox sx={{ color: theme.palette.error.main }}>*</MuiBox>
+        )}
       </Stack>
       <Body>{renderBody}</Body>
     </QuestionBox>

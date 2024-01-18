@@ -1,7 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
-import { Box, AddCircleOutlineIcon, VisibilityIcon } from "@components";
+import {
+  IconButton,
+  Box,
+  AddCircleOutlineIcon,
+  VisibilityIcon,
+} from "@components";
 import { addQuestion } from "@stores";
 import { PATH_SURVEY_PREVIEW } from "@constants";
 

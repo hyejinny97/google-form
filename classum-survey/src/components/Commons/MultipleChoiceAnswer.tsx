@@ -1,4 +1,4 @@
-import { RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { RadioGroup, FormControlLabel, Radio } from "@components";
 import type { OptionType } from "@stores";
 
 interface MultipleChoiceAnswerProps {

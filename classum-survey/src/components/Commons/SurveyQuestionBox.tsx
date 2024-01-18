@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
-import { Box as MuiBox } from "@mui/material";
-import { Box } from "@components";
+import { Box, MuiBox } from "@components";
 import {
   BOX_MARGIN,
   COLOR_PRIMARY,

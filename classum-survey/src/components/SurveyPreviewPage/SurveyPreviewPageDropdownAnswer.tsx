@@ -1,5 +1,4 @@
-import { SelectChangeEvent } from "@mui/material";
-import { DropdownAnswer } from "@components";
+import { DropdownAnswer, SelectChangeEvent } from "@components";
 import type { OptionType } from "@stores";
 
 interface SurveyPreviewPageDropdownAnswerProps {

@@ -1,4 +1,4 @@
-import { Stack, Link } from "@mui/material";
+import { Stack, Link } from "@components";
 import { handleOptionAddFuncType } from "option";
 
 interface InputAdditionOptionProps {

@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-} from "@mui/material";
+} from "@components";
 import { clearSurveyPreviewAnswer } from "@stores";
 
 function SurveyClearButton() {

@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Paper } from "@mui/material";
+import { Paper } from "@components";
 import { BOX_BORDER_RADIUS, BOX_PADDING } from "@constants";
 
 interface BoxProps {

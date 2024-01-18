@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button } from "@components";
 import { PATH_SURVEY_PREVIEW } from "@constants";
 
 function SurveyGoBackButton() {

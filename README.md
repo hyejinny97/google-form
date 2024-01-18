@@ -92,10 +92,10 @@
 
 혹시 SurveyEditPageTitleBox에서 제목 입력창에 값을 입력할 때마다 기존 컴포넌트가 리렌더링되는게 아니라 새로운 컴포넌트가 만들어지는건 아닐까싶어 개발자 검사 도구의 element 탭 부분을 확인해보았다. 확인한 결과, 아래처럼 제목 입력창에 값을 입력할 때마다 SurveyEditPageTitleBox의 div 요소에 보라색 배경이 생기면서 새로 생성됨을 알 수 있었다.
 
-<img src='assets/google-form-edit-page-question-input.gif' width="400px"/> </br >
+<img src='assets/google-form-edit-page-question-input.gif' width="600px"/> </br >
 👉 SurveyEditPageQuestionBox의 title 입력창을 수정하는 경우
 
-<img src='assets/google-form-edit-page-title-input.gif' width="400px"/> </br >
+<img src='assets/google-form-edit-page-title-input.gif' width="600px"/> </br >
 👉 SurveyEditPageTitleBox의 title 입력창을 수정하는 경우
 
 대체 왜 두 컴포넌트가 이러한 차이를 보이는 걸까? SurveyEditPageTitleBox가 렌더링하는 요소 중 하위 요소를 감싸는 SurveyTitleBox 컴포넌트를 주목하게 되었다. SurveyTitleBox 컴포넌트를 보면 컴포넌트 내 `styled(Box)`를 통해 emotion으로 새로운 컴포넌트를 만들어주는 것을 확인할 수 있었다. 혹시, SurveyTitleBox가 리렌더링될 때마다 `styled(Box)`을 호출해 새로운 컴포넌트를 만들게 되고 이로 인해 SurveyTitleBox를 사용하고 있는 SurveyEditPageTitleBox가 리렌더링될 때마다 새로운 돔요소가 만들어지고 있는 걸까라는 의심이 들었다.
@@ -246,11 +246,11 @@ function SurveyEditPageTitleBox() {
 
 개발자 검사 도구에서 profiler 탭의 'Highlight updates when components render.' 설정을 키면, 특정 question box의 입력창에 값을 입력할 때마다 페이지 내 다른 question box 컴포넌트들이 리렌더링되는 것을 확인할 수 있었다.
 
-<img src='assets/googleForm-editPage-beforeMemo.gif' width="400px"/> </br >
+<img src='assets/googleForm-editPage-beforeMemo.gif' width="600px"/> </br >
 
 👉 기존 SurveyEditPageQuestionBox의 입력창에 값을 입력할 경우
 
-<img src='assets/googleForm-previewPage-beforeMemo.gif' width="400px"/> </br >
+<img src='assets/googleForm-previewPage-beforeMemo.gif' width="600px"/> </br >
 👉 기존 SurveyPreviewPageQuestionBox의 입력창에 값을 입력할 경우
 
 모든 question box 내 데이터들을 redux store로 관리하다보니 입력값을 변경할 때마다 redux store로 새 입력값을 dispatch 보내게 되고 store 값이 변경되면 해당 state를 사용하는 컴포넌트(`SurveyEditPageQuestionList`, `SurveyPreviewPageQuestionList`)가 리렌더링되면서 하위 모든 question box들이 리렌더링되는 것이다.
@@ -276,10 +276,10 @@ export default SurveyEditPageQuestionList;
 
 위처럼 해당 question box가 아닌 다른 question box들도 불필요하게 리렌더링되는 것을 보고 개선해야할 필요성을 느꼈다. 어떻게 효율적으로 렌더링할 수 있을까 고민하다가 `React.memo()` 함수를 사용해 기존 컴포넌트를 메모이제이션하는 방법을 떠올렸다. `React.memo()` 함수를 사용해 컴포넌트를 감싸게 되면, 현재 props와 이전 props를 비교해 같은 경우 기존 컴포넌트를 재사용하게 되면서 렌더링 효율성을 높일 수 있다.
 
-<img src='assets/googleForm-editPage-afterMemo.gif' width="400px"/> </br >
+<img src='assets/googleForm-editPage-afterMemo.gif' width="600px"/> </br >
 👉 SurveyEditPageQuestionBox에 `React.memo()`를 적용한 후
 
-<img src='assets/googleForm-previewPage-afterMemo.gif' width="400px"/> </br >
+<img src='assets/googleForm-previewPage-afterMemo.gif' width="600px"/> </br >
 👉 SurveyPreviewPageQuestionBox에 `React.memo()`를 적용한 후
 
 ## 💡 고민한 점 & 배운 점
@@ -304,6 +304,34 @@ MUI에는 `Material UI`, `Joy UI`, `Base UI` 세 가지가 존재한다. MUI를 
 ### 🔹 MUI Bundle Size 최소화
 
 > 참고: [Minimizing bundle size](https://mui.com/material-ui/guides/minimizing-bundle-size/)
+
+위 참고 링크를 들어가 공식 문서를 읽어보면 `mui` 라이브러리를 사용해서 컴포넌트를 import할 때, 아래처럼 `Named Import`를 하면 `Default Import`할 때보다 6배 더 늦은 startup times를 일으킬 수 있다고 한다.
+
+```js
+// 🐌 Named
+import { Delete } from "@mui/icons-material";
+```
+
+```js
+// 🚀 Default
+import Delete from "@mui/icons-material/Delete";
+```
+
+ES6 module을 사용하고 tree-shaking을 지원하는 bundler(`webpack >= 2.x`, `parcel with a flag`)의 경우, `Named Import`를 해도 자동으로 bundle size를 최적화할 수 있다고 한다. `create-react-app`의 경우 webpack을 사용하고 있으므로 아마 제대로 tree-shaking이 적용되어 최적화된 bundle size를 만들 수 있겠지만, 이 프로젝트에선 `vite`를 사용했기 때문에 tree-shaking이 제대로 적용되었는지 확신할 수 없었다. 따라서, lighthouse를 사용해 성능 분석을 해보았더니 아래와 같이 'Reduce unused JavaScript'에서 사용하지도 않은 mui component들이 bundler에 포함되어 있음을 알 수 있었다.
+
+<img src='assets/editPage-before-mui-default-import.PNG' width="600px"/> </br >
+<img src='assets/editPage-before-mui-default-import-2.PNG' width="600px"/> </br >
+<img src='assets/editPage-before-mui-default-import-3.PNG' width="600px"/> </br >
+<img src='assets/editPage-before-mui-default-import-4.PNG' width="600px"/> </br >
+👉 기존 SurveyEditPage에서 lighthouse 성능 측정 결과
+
+Bundle Size를 최소화하기 위해 공식 문서에 따라 `Named Import`를 전부 `Default Import`로 변환시켜 주었다. 그 결과, 아래처럼 'Reduce unused JavaScript'에서 Transfer Size 크기가 3,064.6KiB에서 2,278.9KiB로 감소하고, 'Total Blocking Time' 값이 250ms에서 210ms로 감소하면서 Performance가 46%에서 48%로 증가한 것을 확인할 수 있었다. 비록, 성능 향상 정도는 미미했지만 그래도 위 과정을 통해 bundle size 최적화에 기여할 수 있었다.
+
+<img src='assets/editPage-after-mui-default-import.PNG' width="600px"/> </br >
+<img src='assets/editPage-after-mui-default-import-2.PNG' width="600px"/> </br >
+<img src='assets/editPage-after-mui-default-import-3.PNG' width="600px"/> </br >
+<img src='assets/editPage-after-mui-default-import-4.PNG' width="600px"/> </br >
+👉 `Default Import`로 변환 후, SurveyEditPage에서 lighthouse 성능 측정 결과
 
 ### 🔹 TypeScript 전역 타입 정의
 

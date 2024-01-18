@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
-import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import {
+  Select,
+  MenuItem,
+  SelectChangeEvent,
   ShortTextIcon,
   NotesIcon,
   RadioButtonCheckedIcon,

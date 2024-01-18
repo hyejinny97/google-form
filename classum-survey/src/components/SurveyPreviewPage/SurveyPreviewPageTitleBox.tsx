@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import { Divider, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useSelector, shallowEqual } from "react-redux";
-import { SurveyTitleBox } from "@components";
+import { Divider, MuiBox, SurveyTitleBox } from "@components";
 import type { RootState } from "@stores";
 import {
   TITLE_BOX_TITLE_FONT_SIZE,
@@ -17,7 +16,7 @@ const SurveyTitleDesc = styled.p`
   margin: ${TITLE_BOX_TITLE_DESC_MARGIN};
 `;
 
-const SubText = styled(Box)`
+const SubText = styled(MuiBox)`
   margin-top: 1rem;
 `;
 
