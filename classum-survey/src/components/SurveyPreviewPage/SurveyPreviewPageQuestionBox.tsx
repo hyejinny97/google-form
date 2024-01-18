@@ -1,3 +1,4 @@
+import React from "react";
 import { useActionData } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
@@ -34,7 +35,7 @@ const Body = styled.div`
   margin-top: 1rem;
 `;
 
-function SurveyPreviewPageQuestionBox({
+function TempSurveyPreviewPageQuestionBox({
   questionData: { id, title, type, required, options },
   answerData,
   disabled,
@@ -151,5 +152,21 @@ function SurveyPreviewPageQuestionBox({
     </QuestionBox>
   );
 }
+
+const propsAreEqual = (
+  prevProps: SurveyPreviewPageQuestionBoxProps,
+  nextProps: SurveyPreviewPageQuestionBoxProps
+) => {
+  return (
+    prevProps.questionData === nextProps.questionData &&
+    prevProps.answerData === nextProps.answerData &&
+    prevProps.disabled === nextProps.disabled
+  );
+};
+
+const SurveyPreviewPageQuestionBox = React.memo(
+  TempSurveyPreviewPageQuestionBox,
+  propsAreEqual
+);
 
 export default SurveyPreviewPageQuestionBox;
