@@ -26,6 +26,8 @@
 
 ## ✨ 완성 결과물
 
+- 배포 사이트 링크: https://google-form-pkukd77d6-hyejinny97s-projects.vercel.app/
+
 ## ⚙ 설치 및 실행 방법
 
 - `package.json` 내 모든 패키지 설치하기
