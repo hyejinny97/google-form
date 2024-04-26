@@ -28,6 +28,18 @@
 
 - 배포 사이트 링크: https://google-form-pkukd77d6-hyejinny97s-projects.vercel.app/
 
+### 1️⃣ 설문지 제작 페이지
+
+<img src="./assets/survey-edit.gif" width="600px" />
+
+### 2️⃣ 설문지 미리보기 페이지
+
+<img src="./assets/survey-preview.gif" width="600px" />
+
+### 3️⃣ 설문지 제출 완료 페이지
+
+<img src="./assets/survey-submit.gif" width="600px" />
+
 ## ⚙ 설치 및 실행 방법
 
 - `package.json` 내 모든 패키지 설치하기
